@@ -103,3 +103,8 @@ shape = SubResource("RectangleShape2D_irw1w")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tan5t")
 animation = &"idle"
+
+[node name="MiningTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="MiningTimer" to="." method="_on_mining_timer_timeout"]

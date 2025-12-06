@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://f4ofdiq71cn8"]
+[gd_scene load_steps=4 format=3 uid="uid://f4ofdiq71cn8"]
 
 [ext_resource type="PackedScene" uid="uid://d3w3bugoejq75" path="res://world/miner/miner.tscn" id="1_6xmxd"]
+[ext_resource type="PackedScene" uid="uid://cden776bhu3x1" path="res://world/walls/stone_wall.tscn" id="2_tcf2h"]
+[ext_resource type="PackedScene" uid="uid://cekf6rmx2iwnc" path="res://world/lift/lift.tscn" id="3_4717r"]
 
 [node name="World" type="Node2D"]
 
 [node name="Miner" parent="." instance=ExtResource("1_6xmxd")]
-position = Vector2(5, 174)
+position = Vector2(47, 174)
+
+[node name="StoneWall" parent="." instance=ExtResource("2_tcf2h")]
+position = Vector2(310, 0)
+
+[node name="Lift" parent="." instance=ExtResource("3_4717r")]
+position = Vector2(16, 164)
+
+[connection signal="area_entered" from="StoneWall" to="Miner" method="_on_stone_wall_area_entered"]
+[connection signal="area_entered" from="Lift" to="Miner" method="_on_lift_area_entered"]
