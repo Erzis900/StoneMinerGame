@@ -1,0 +1,105 @@
+[gd_scene load_steps=15 format=3 uid="uid://d3w3bugoejq75"]
+
+[ext_resource type="Texture2D" uid="uid://dy3yjnayasqqm" path="res://world/miner/miner.png" id="1_1u7pu"]
+[ext_resource type="Script" uid="uid://3fx54j3lymhk" path="res://world/miner/miner.gd" id="1_irw1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irw1w"]
+size = Vector2(10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34c8q"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhn71"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqq3g"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivpy8"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyrf6"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u7pu"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irw1w"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tan5t"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yrrs"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrp5s"]
+atlas = ExtResource("1_1u7pu")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tan5t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34c8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhn71")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqq3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivpy8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nyrf6")
+}],
+"loop": true,
+"name": &"mine",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u7pu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irw1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tan5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yrrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrp5s")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}]
+
+[node name="Miner" type="Area2D"]
+script = ExtResource("1_irw1w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_irw1w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tan5t")
+animation = &"idle"

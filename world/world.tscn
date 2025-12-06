@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://f4ofdiq71cn8"]
+
+[ext_resource type="PackedScene" uid="uid://d3w3bugoejq75" path="res://world/miner/miner.tscn" id="1_6xmxd"]
+
+[node name="World" type="Node2D"]
+
+[node name="Miner" parent="." instance=ExtResource("1_6xmxd")]
+position = Vector2(5, 174)
