@@ -1,7 +1,7 @@
 class_name Miner extends Area2D
 
 # exports
-@export var movement_speed: float = 100
+@export var movement_speed: float = 64
 
 # children
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -19,6 +19,13 @@ func _physics_process(delta: float) -> void:
 	elif state == States.MINING:
 		mine()
 
+	add_debug_data()
+
+
+func add_debug_data() -> void:
+	Global.debug.add_property("Miner State", States.keys()[state])
+	Global.debug.add_property("Miner Position", position)
+
 
 func walk(delta: float) -> void:
 	position += direction * movement_speed * delta
@@ -31,7 +38,7 @@ func mine() -> void:
 
 func _on_stone_wall_area_entered(_area: Area2D) -> void:
 	mining_timer.start()
-	state = States.MINING
+	change_state(States.MINING)
 
 
 func _on_lift_area_entered(_area: Area2D) -> void:
@@ -46,4 +53,8 @@ func change_walk_direction() -> void:
 func _on_mining_timer_timeout() -> void:
 	mining_timer.stop()
 	change_walk_direction()
-	state = States.WALKING
+	change_state(States.WALKING)
+
+
+func change_state(new_state: States) -> void:
+	state = new_state
