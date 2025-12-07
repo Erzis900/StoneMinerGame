@@ -64,7 +64,7 @@ func _on_mining_timer_timeout() -> void:
 
 
 func _on_lift_response_lift_ready(is_ready: bool) -> void:
-	if is_ready:
+	if is_ready and state == States.IDLE:
 		state = States.WALKING
 		change_walk_direction()
 		loot_dumped.emit()
