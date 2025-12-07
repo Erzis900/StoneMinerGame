@@ -57,41 +57,40 @@ position = Vector2(60, 160)
 collision_layer = 4
 collision_mask = 0
 
-[node name="LiftStopers" type="Node" parent="."]
+[node name="LiftStoppers" type="Node" parent="."]
 
-[node name="LiftStoperUp" type="Area2D" parent="LiftStopers"]
+[node name="LiftStopperUp" type="Area2D" parent="LiftStoppers"]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LiftStopers/LiftStoperUp"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LiftStoppers/LiftStopperUp"]
 position = Vector2(16, -6)
 shape = SubResource("RectangleShape2D_mmdvd")
 
-[node name="LiftStoperDown" type="Area2D" parent="LiftStopers"]
+[node name="LiftStopperDown" type="Area2D" parent="LiftStoppers"]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LiftStopers/LiftStoperDown"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LiftStoppers/LiftStopperDown"]
 position = Vector2(16, 162)
 shape = SubResource("RectangleShape2D_fn3g3")
 
-[node name="PlayerStopers" type="Node" parent="."]
+[node name="PlayerStoppers" type="Node" parent="."]
 
-[node name="StoneWall" parent="PlayerStopers" instance=ExtResource("2_tcf2h")]
+[node name="StoneWall" parent="PlayerStoppers" instance=ExtResource("2_tcf2h")]
 position = Vector2(312, 0)
 collision_layer = 8
 collision_mask = 4
 
-[node name="PlayerStoperLift" type="Area2D" parent="PlayerStopers"]
+[node name="PlayerStopperLift" type="Area2D" parent="PlayerStoppers"]
 collision_layer = 8
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStopers/PlayerStoperLift"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStoppers/PlayerStopperLift"]
 position = Vector2(16, 158)
 shape = SubResource("RectangleShape2D_sc4t8")
 
-[connection signal="response_lift_ready" from="Lift" to="Miner" method="_on_lift_response_lift_ready"]
-[connection signal="loot_dumped" from="Miner" to="Lift" method="_on_miner_loot_dumped"]
-[connection signal="request_lift_ready" from="Miner" to="Lift" method="_on_miner_request_lift_ready"]
-[connection signal="area_entered" from="LiftStopers/LiftStoperUp" to="Lift" method="_on_lift_stoper_up_area_entered"]
-[connection signal="area_entered" from="LiftStopers/LiftStoperDown" to="Lift" method="_on_lift_stoper_down_area_entered"]
-[connection signal="area_entered" from="PlayerStopers/StoneWall" to="Miner" method="_on_stone_wall_area_entered"]
-[connection signal="area_entered" from="PlayerStopers/PlayerStoperLift" to="Miner" method="_on_player_stoper_lift_area_entered"]
+[connection signal="area_entered" from="Lift" to="Miner" method="_on_lift_area_entered"]
+[connection signal="area_entered" from="Miner" to="Lift" method="_on_miner_area_entered"]
+[connection signal="area_entered" from="LiftStoppers/LiftStopperUp" to="Lift" method="_on_lift_stoper_up_area_entered"]
+[connection signal="area_entered" from="LiftStoppers/LiftStopperDown" to="Lift" method="_on_lift_stoper_down_area_entered"]
+[connection signal="area_entered" from="PlayerStoppers/StoneWall" to="Miner" method="_on_stone_wall_area_entered"]
+[connection signal="area_entered" from="PlayerStoppers/PlayerStopperLift" to="Miner" method="_on_player_stopper_lift_area_entered"]

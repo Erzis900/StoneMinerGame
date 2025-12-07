@@ -1,9 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://cekf6rmx2iwnc"]
+[gd_scene load_steps=4 format=3 uid="uid://cekf6rmx2iwnc"]
+
+[ext_resource type="Texture2D" uid="uid://r38dvkkjx4xm" path="res://world/lift/lift.png" id="1_qafl2"]
+[ext_resource type="Script" uid="uid://clsp57nqcu1bl" path="res://world/lift/lift.gd" id="1_s8oxf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4yro4"]
-size = Vector2(32, 32)
+size = Vector2(32, 8)
 
 [node name="Lift" type="Area2D"]
+script = ExtResource("1_s8oxf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_4yro4")
+
+[node name="LiftSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -74)
+texture = ExtResource("1_qafl2")
+
+[node name="UnloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="UnloadTimer" to="." method="_on_unload_timer_timeout"]

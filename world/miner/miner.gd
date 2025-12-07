@@ -12,12 +12,19 @@ enum States { IDLE, WALKING, MINING }
 var state: States = States.WALKING
 var direction: Vector2 = Vector2.RIGHT
 
+# signals
+signal request_lift_ready
+signal loot_dumped
+
 
 func _physics_process(delta: float) -> void:
-	if state == States.WALKING:
-		walk(delta)
-	elif state == States.MINING:
-		mine()
+	match state:
+		States.WALKING:
+			walk(delta)
+		States.MINING:
+			mine()
+		States.IDLE:
+			idle()
 
 	add_debug_data()
 
@@ -25,6 +32,10 @@ func _physics_process(delta: float) -> void:
 func add_debug_data() -> void:
 	Global.debug.add_property("Miner State", States.keys()[state])
 	Global.debug.add_property("Miner Position", position)
+
+
+func idle() -> void:
+	animated_sprite.play("idle")
 
 
 func walk(delta: float) -> void:
@@ -38,11 +49,7 @@ func mine() -> void:
 
 func _on_stone_wall_area_entered(_area: Area2D) -> void:
 	mining_timer.start()
-	change_state(States.MINING)
-
-
-func _on_lift_area_entered(_area: Area2D) -> void:
-	change_walk_direction()
+	state = States.MINING
 
 
 func change_walk_direction() -> void:
@@ -53,8 +60,16 @@ func change_walk_direction() -> void:
 func _on_mining_timer_timeout() -> void:
 	mining_timer.stop()
 	change_walk_direction()
-	change_state(States.WALKING)
+	state = States.WALKING
 
 
-func change_state(new_state: States) -> void:
-	state = new_state
+func _on_lift_response_lift_ready(is_ready: bool) -> void:
+	if is_ready:
+		state = States.WALKING
+		change_walk_direction()
+		loot_dumped.emit()
+
+
+func _on_player_stoper_lift_area_entered(area: Area2D) -> void:
+	state = States.IDLE
+	request_lift_ready.emit()
