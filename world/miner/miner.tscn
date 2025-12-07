@@ -98,12 +98,14 @@ animations = [{
 script = ExtResource("1_irw1w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_irw1w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_tan5t")
 animation = &"walk_right"
-frame_progress = 0.8106527
+frame_progress = 0.789775
 
 [node name="MiningTimer" type="Timer" parent="."]
 wait_time = 2.0

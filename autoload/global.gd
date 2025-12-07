@@ -1,5 +1,5 @@
 extends Node
 
-const DEFAULT_TIME_SCALE = 1.0
+var DEFAULT_TIME_SCALE: float = Engine.time_scale
 
 var debug: DebugPropertyContainer
