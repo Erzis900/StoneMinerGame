@@ -2,6 +2,7 @@ class_name Miner extends Area2D
 
 # exports
 @export var movement_speed: float = 64
+@export var mining_particles: PackedScene
 
 # children
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -73,3 +74,9 @@ func _on_lift_response_lift_ready(is_ready: bool) -> void:
 func _on_player_stoper_lift_area_entered(area: Area2D) -> void:
 	state = States.IDLE
 	request_lift_ready.emit()
+
+
+func _on_animated_sprite_2d_animation_looped() -> void:
+	if animated_sprite.animation == "mine":
+		var particles_instance = mining_particles.instantiate()
+		add_child(particles_instance)
