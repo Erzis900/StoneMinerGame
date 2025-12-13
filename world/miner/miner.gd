@@ -5,7 +5,8 @@ class_name Miner extends Area2D
 @export var mining_particles: PackedScene
 
 # children
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var mining_timer: Timer = $MiningTimer
 
 # private
@@ -36,16 +37,16 @@ func add_debug_data() -> void:
 
 
 func wait() -> void:
-	animated_sprite.play("idle")
+	animation_player.play("idle")
 
 
 func walk(delta: float) -> void:
 	position += direction * movement_speed * delta
-	animated_sprite.play("walk_right")
+	animation_player.play("walk_right")
 
 
 func mine() -> void:
-	animated_sprite.play("mine")
+	animation_player.play("mine")
 
 
 func _on_stone_wall_area_entered(_area: Area2D) -> void:
@@ -55,7 +56,7 @@ func _on_stone_wall_area_entered(_area: Area2D) -> void:
 
 func change_walk_direction() -> void:
 	direction.x *= -1
-	animated_sprite.flip_h = !animated_sprite.flip_h
+	sprite_2d.flip_h = !sprite_2d.flip_h
 
 
 func _on_mining_timer_timeout() -> void:
@@ -68,10 +69,9 @@ func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
 	request_lift_ready.emit()
 
 
-func _on_animated_sprite_2d_animation_looped() -> void:
-	if animated_sprite.animation == "mine":
-		var particles_instance = mining_particles.instantiate()
-		add_child(particles_instance)
+func spawn_mining_particles() -> void:
+	var particles_instance = mining_particles.instantiate()
+	add_child(particles_instance)
 
 
 func _on_lift_ready_to_load(is_ready: bool) -> void:
