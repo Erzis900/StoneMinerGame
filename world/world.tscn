@@ -89,7 +89,7 @@ collision_mask = 4
 position = Vector2(16, 158)
 shape = SubResource("RectangleShape2D_sc4t8")
 
-[connection signal="response_lift_ready" from="Lift" to="Miner" method="_on_lift_response_lift_ready"]
+[connection signal="ready_to_load" from="Lift" to="Miner" method="_on_lift_ready_to_load"]
 [connection signal="loot_dumped" from="Miner" to="Lift" method="_on_miner_loot_dumped"]
 [connection signal="request_lift_ready" from="Miner" to="Lift" method="_on_miner_request_lift_ready"]
 [connection signal="area_entered" from="LiftStopers/LiftStoperUp" to="Lift" method="_on_lift_stoper_up_area_entered"]

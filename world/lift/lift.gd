@@ -4,12 +4,12 @@ class_name Lift extends Area2D
 @export var movement_speed: float = 32
 
 # private
-enum States { READY, UNLOAD, MOVING }
+enum States { READY, UNLOADING, MOVING }
 var state: States = States.READY
 var direction: Vector2 = Vector2.DOWN
 
 # signals
-signal response_lift_ready(is_ready: bool)
+signal ready_to_load(is_ready: bool)
 
 # children
 @onready var unload_timer: Timer = $UnloadTimer
@@ -27,26 +27,26 @@ func move(delta: float) -> void:
 
 
 func add_debug_data() -> void:
-	Global.debug.add_property("Lift State", States.keys()[state])
-	Global.debug.add_property("Lift Position", position)
+	Debug.add("Lift State", States.keys()[state])
+	Debug.add("Lift Position", position)
 
 
-func _on_lift_stoper_up_area_entered(area: Area2D) -> void:
-	state = States.UNLOAD
+func _on_lift_stoper_up_area_entered(_area: Area2D) -> void:
+	state = States.UNLOADING
 	unload_timer.start()
 
 
-func _on_lift_stoper_down_area_entered(area: Area2D) -> void:
+func _on_lift_stoper_down_area_entered(_area: Area2D) -> void:
 	if state == States.MOVING:
 		state = States.READY
-		response_lift_ready.emit(true)
+		ready_to_load.emit(true)
 
 
 func _on_miner_request_lift_ready() -> void:
 	if state == States.READY:
-		response_lift_ready.emit(true)
+		ready_to_load.emit(true)
 	else:
-		response_lift_ready.emit(false)
+		ready_to_load.emit(false)
 
 
 func _on_miner_loot_dumped() -> void:

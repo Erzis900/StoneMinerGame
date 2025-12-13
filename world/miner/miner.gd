@@ -9,7 +9,7 @@ class_name Miner extends Area2D
 @onready var mining_timer: Timer = $MiningTimer
 
 # private
-enum States { IDLE, WALKING, MINING }
+enum States { WAITING, WALKING, MINING }
 var state: States = States.WALKING
 var direction: Vector2 = Vector2.RIGHT
 
@@ -24,18 +24,18 @@ func _physics_process(delta: float) -> void:
 			walk(delta)
 		States.MINING:
 			mine()
-		States.IDLE:
-			idle()
+		States.WAITING:
+			wait()
 
 	add_debug_data()
 
 
 func add_debug_data() -> void:
-	Global.debug.add_property("Miner State", States.keys()[state])
-	Global.debug.add_property("Miner Position", position)
+	Debug.add("Miner State", States.keys()[state])
+	Debug.add("Miner Position", position)
 
 
-func idle() -> void:
+func wait() -> void:
 	animated_sprite.play("idle")
 
 
@@ -63,16 +63,8 @@ func _on_mining_timer_timeout() -> void:
 	change_walk_direction()
 	state = States.WALKING
 
-
-func _on_lift_response_lift_ready(is_ready: bool) -> void:
-	if is_ready and state == States.IDLE:
-		state = States.WALKING
-		change_walk_direction()
-		loot_dumped.emit()
-
-
-func _on_player_stoper_lift_area_entered(area: Area2D) -> void:
-	state = States.IDLE
+func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
+	state = States.WAITING
 	request_lift_ready.emit()
 
 
@@ -80,3 +72,10 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 	if animated_sprite.animation == "mine":
 		var particles_instance = mining_particles.instantiate()
 		add_child(particles_instance)
+
+
+func _on_lift_ready_to_load(is_ready: bool) -> void:
+	if is_ready and state == States.WAITING:
+		state = States.WALKING
+		change_walk_direction()
+		loot_dumped.emit()

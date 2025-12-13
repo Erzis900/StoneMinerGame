@@ -2,7 +2,7 @@ extends Label
 
 
 func _ready() -> void:
-	text = "Time Scale: %.1f" % Global.DEFAULT_TIME_SCALE
+	text = "Time Scale: %.1f" % Engine.time_scale
 
 
 func _on_time_scale_h_scroll_bar_value_changed(value: float) -> void:
@@ -10,4 +10,4 @@ func _on_time_scale_h_scroll_bar_value_changed(value: float) -> void:
 
 
 func _on_time_scale_reset_button_pressed() -> void:
-	text = "Time Scale: %.1f" % Global.DEFAULT_TIME_SCALE
+	text = "Time Scale: %.1f" % 1.0

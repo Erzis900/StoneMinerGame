@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SignalBus="*res://autoload/signal_bus.gd"
-Global="*res://autoload/global.gd"
+Debug="*res://autoload/debug.gd"
 
 [display]
 

@@ -5,7 +5,7 @@ var is_debug: bool = true
 
 func _ready() -> void:
 	visible = is_debug
-	Global.debug = %PropertyContainer
+	Debug.property_container = %PropertyContainer
 
 
 func _input(_event: InputEvent) -> void:

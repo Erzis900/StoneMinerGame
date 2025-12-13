@@ -2,7 +2,7 @@ extends HScrollBar
 
 
 func _ready() -> void:
-	value = Global.DEFAULT_TIME_SCALE
+	value = Engine.time_scale
 
 
 func _on_value_changed(new_value: float) -> void:
@@ -10,4 +10,4 @@ func _on_value_changed(new_value: float) -> void:
 
 
 func _on_time_scale_reset_button_pressed() -> void:
-	value = Global.DEFAULT_TIME_SCALE
+	value = 1.0
