@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://f4ofdiq71cn8"]
+[gd_scene load_steps=12 format=4 uid="uid://f4ofdiq71cn8"]
 
 [ext_resource type="PackedScene" uid="uid://d3w3bugoejq75" path="res://world/miner/miner.tscn" id="1_6xmxd"]
+[ext_resource type="Script" uid="uid://bybjw7chkiasm" path="res://world/world.gd" id="1_fn3g3"]
 [ext_resource type="PackedScene" uid="uid://cden776bhu3x1" path="res://world/walls/stone_wall.tscn" id="2_tcf2h"]
 [ext_resource type="PackedScene" uid="uid://cekf6rmx2iwnc" path="res://world/lift/lift.tscn" id="3_4717r"]
 [ext_resource type="Texture2D" uid="uid://cadl6oghhf5kb" path="res://world/level/stone_wall.png" id="4_h5o24"]
@@ -39,6 +40,7 @@ size = Vector2(32, 4)
 size = Vector2(32, 4)
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_fn3g3")
 
 [node name="Background" parent="." instance=ExtResource("5_mmdvd")]
 position = Vector2(160, 88)

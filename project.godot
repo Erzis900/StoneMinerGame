@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="*res://autoload/signal_bus.gd"
 Debug="*res://autoload/debug.gd"
+SignalBus="*res://autoload/signal_bus.gd"
 
 [display]
 
