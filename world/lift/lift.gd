@@ -7,9 +7,11 @@ class_name Lift extends Area2D
 enum States { READY, UNLOADING, MOVING }
 var state: States = States.READY
 var direction: Vector2 = Vector2.DOWN
+var stone: int = 0
 
 # signals
 signal ready_to_load(is_ready: bool)
+signal unloaded(amount: int)
 
 # children
 @onready var unload_timer: Timer = $UnloadTimer
@@ -28,7 +30,7 @@ func move(delta: float) -> void:
 
 func add_debug_data() -> void:
 	Debug.add("Lift State", States.keys()[state])
-	Debug.add("Lift Position", position)
+	Debug.add("Lift Stone", stone)
 
 
 func _on_lift_stoper_up_area_entered(_area: Area2D) -> void:
@@ -49,13 +51,18 @@ func _on_miner_request_lift_ready() -> void:
 		ready_to_load.emit(false)
 
 
-func _on_miner_loot_dumped() -> void:
+func _on_miner_loot_dumped(amount: int) -> void:
+	stone = amount
+	
 	state = States.MOVING
 	change_move_direction()
 
 
 func _on_unload_timer_timeout() -> void:
 	unload_timer.stop()
+	unloaded.emit(stone)
+	stone = 0
+	
 	state = States.MOVING
 	change_move_direction()
 

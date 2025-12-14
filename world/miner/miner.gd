@@ -4,7 +4,7 @@ class_name Miner extends Area2D
 @export var movement_speed: float = 64
 @export var damage: int = 1
 @export var max_hits: int = 3
-@export var mining_speed: float = 2
+@export var mining_speed: float = 1
 
 @export var mining_particles: PackedScene
 
@@ -18,10 +18,12 @@ var state: States = States.WALKING
 var direction: Vector2 = Vector2.RIGHT
 var pickaxe_offset: Vector2 = Vector2(8, -5)
 var hits: int = 0
+var stone: int = 0
 
 # signals
 signal request_lift_ready
-signal loot_dumped
+signal loot_dumped(amount: int)
+signal damage_dealt(damage: int)
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -40,9 +42,7 @@ func _input(_event: InputEvent) -> void:
 
 func add_debug_data() -> void:
 	Debug.add("Miner State", States.keys()[state])
-	Debug.add("Miner Position", position)
-	Debug.add("Hits", hits)
-
+	Debug.add("Miner Stone", stone)
 
 func wait() -> void:
 	animation_player.play("wait")
@@ -82,14 +82,23 @@ func spawn_mining_particles() -> void:
 
 func _on_lift_ready_to_load(is_ready: bool) -> void:
 	if is_ready and state == States.WAITING:
+		loot_dumped.emit(stone)
+		stone = 0
+
 		state = States.WALKING
 		change_walk_direction()
-		loot_dumped.emit()
 
 
 func check_hits() -> void:
+	damage_dealt.emit(damage)
 	hits += 1
 	if hits == max_hits:
 		hits = 0
 		change_walk_direction()
 		state = States.WALKING
+
+
+func _on_stone_wall_stone_dropped(amount: int) -> void:
+	var floating_text_position = position + pickaxe_offset - Vector2(16, 16)
+	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount)
+	stone += amount

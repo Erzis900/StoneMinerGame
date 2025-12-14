@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://f4ofdiq71cn8"]
+[gd_scene load_steps=13 format=4 uid="uid://f4ofdiq71cn8"]
 
 [ext_resource type="PackedScene" uid="uid://d3w3bugoejq75" path="res://world/miner/miner.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://bybjw7chkiasm" path="res://world/world.gd" id="1_fn3g3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cekf6rmx2iwnc" path="res://world/lift/lift.tscn" id="3_4717r"]
 [ext_resource type="Texture2D" uid="uid://cadl6oghhf5kb" path="res://world/level/stone_wall.png" id="4_h5o24"]
 [ext_resource type="PackedScene" uid="uid://obevqtjw032c" path="res://world/level/background/background.tscn" id="5_mmdvd"]
+[ext_resource type="Script" uid="uid://csugsxsl57eb7" path="res://world/walls/stone_wall.gd" id="7_sc4t8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5o24"]
 texture = ExtResource("4_h5o24")
@@ -53,7 +54,6 @@ tile_set = SubResource("TileSet_4717r")
 [node name="Lift" parent="." instance=ExtResource("3_4717r")]
 position = Vector2(16, 144)
 collision_mask = 4
-movement_speed = 32.0
 
 [node name="Miner" parent="." instance=ExtResource("1_6xmxd")]
 position = Vector2(60, 160)
@@ -82,6 +82,7 @@ shape = SubResource("RectangleShape2D_fn3g3")
 position = Vector2(312, 0)
 collision_layer = 8
 collision_mask = 4
+script = ExtResource("7_sc4t8")
 
 [node name="PlayerStoperLift" type="Area2D" parent="PlayerStopers"]
 collision_layer = 8
@@ -92,9 +93,12 @@ position = Vector2(16, 158)
 shape = SubResource("RectangleShape2D_sc4t8")
 
 [connection signal="ready_to_load" from="Lift" to="Miner" method="_on_lift_ready_to_load"]
+[connection signal="unloaded" from="Lift" to="." method="_on_lift_unloaded"]
+[connection signal="damage_dealt" from="Miner" to="PlayerStopers/StoneWall" method="_on_miner_damage_dealt"]
 [connection signal="loot_dumped" from="Miner" to="Lift" method="_on_miner_loot_dumped"]
 [connection signal="request_lift_ready" from="Miner" to="Lift" method="_on_miner_request_lift_ready"]
 [connection signal="area_entered" from="LiftStopers/LiftStoperUp" to="Lift" method="_on_lift_stoper_up_area_entered"]
 [connection signal="area_entered" from="LiftStopers/LiftStoperDown" to="Lift" method="_on_lift_stoper_down_area_entered"]
 [connection signal="area_entered" from="PlayerStopers/StoneWall" to="Miner" method="_on_stone_wall_area_entered"]
+[connection signal="stone_dropped" from="PlayerStopers/StoneWall" to="Miner" method="_on_stone_wall_stone_dropped"]
 [connection signal="area_entered" from="PlayerStopers/PlayerStoperLift" to="Miner" method="_on_player_stoper_lift_area_entered"]

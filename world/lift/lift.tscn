@@ -8,7 +8,6 @@ size = Vector2(32, 8)
 
 [node name="Lift" type="Area2D"]
 script = ExtResource("1_s8oxf")
-movement_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12)
