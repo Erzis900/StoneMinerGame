@@ -2,6 +2,7 @@ class_name Lift extends Area2D
 
 # exports
 @export var movement_speed: float = 32
+@onready var bag: Sprite2D = $BagSprite
 
 # private
 enum States { READY, UNLOADING, MOVING }
@@ -15,6 +16,10 @@ signal unloaded(amount: int)
 
 # children
 @onready var unload_timer: Timer = $UnloadTimer
+
+
+func _ready() -> void:
+	bag.hide()
 
 
 func _physics_process(delta: float) -> void:
@@ -53,7 +58,8 @@ func _on_miner_request_lift_ready() -> void:
 
 func _on_miner_loot_dumped(amount: int) -> void:
 	stone = amount
-	
+	bag.show()
+
 	state = States.MOVING
 	change_move_direction()
 
@@ -62,7 +68,9 @@ func _on_unload_timer_timeout() -> void:
 	unload_timer.stop()
 	unloaded.emit(stone)
 	stone = 0
-	
+
+	bag.hide()
+
 	state = States.MOVING
 	change_move_direction()
 
