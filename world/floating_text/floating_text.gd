@@ -6,9 +6,13 @@ class_name FloatingText extends Node2D
 @export var lifetime: float = 0.5
 
 
-func init(text_position: Vector2, text_content: String) -> void:
-	position = text_position
-	label.text = text_content
+func init(_position: Vector2, text: String, _lifetime: float, font_size: int) -> void:
+	position = _position
+	label.text = text
+	lifetime = _lifetime
+	
+	if font_size != 32:
+		label.add_theme_font_size_override("font_size", font_size)
 
 
 func play_tween() -> void:

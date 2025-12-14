@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://ntcbmcffxfh6" path="res://debug_overlay/debug_overlay.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://d0tcqf26j86px" path="res://world/floating_text/floating_text_manager.tscn" id="3_h2yge"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "world")]
+[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "sub_viewport", "world")]
 script = ExtResource("1_1bvp3")
 floating_text_manager = NodePath("CanvasLayer/FloatingTextManager")
 sub_viewport_container = NodePath("CanvasLayer/SubViewportContainer")
+sub_viewport = NodePath("CanvasLayer/SubViewportContainer/SubViewport")
 world = NodePath("CanvasLayer/SubViewportContainer/SubViewport/World")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

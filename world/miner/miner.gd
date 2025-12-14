@@ -100,5 +100,5 @@ func check_hits() -> void:
 
 func _on_stone_wall_stone_dropped(amount: int) -> void:
 	var floating_text_position = position + pickaxe_offset - Vector2(16, 16)
-	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount)
+	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount, 2.0)
 	stone += amount
