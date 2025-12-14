@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn0b72xnr3sm6"]
+[gd_scene load_steps=6 format=3 uid="uid://cn0b72xnr3sm6"]
 
 [ext_resource type="Script" uid="uid://bvootevqvcowr" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://f4ofdiq71cn8" path="res://world/world.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ntcbmcffxfh6" path="res://debug_overlay/debug_overlay.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://d0tcqf26j86px" path="res://world/floating_text/floating_text_manager.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d2bo4eybxrm5q" path="res://hud/hud.tscn" id="5_lquwl"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "sub_viewport", "world")]
+[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "sub_viewport", "world", "hud")]
 script = ExtResource("1_1bvp3")
 floating_text_manager = NodePath("CanvasLayer/FloatingTextManager")
 sub_viewport_container = NodePath("CanvasLayer/SubViewportContainer")
 sub_viewport = NodePath("CanvasLayer/SubViewportContainer/SubViewport")
 world = NodePath("CanvasLayer/SubViewportContainer/SubViewport/World")
+hud = NodePath("CanvasLayer/HUD")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -31,6 +33,8 @@ size = Vector2i(320, 180)
 render_target_update_mode = 4
 
 [node name="World" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_ig7tw")]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_lquwl")]
 
 [node name="DebugOverlay" parent="CanvasLayer" instance=ExtResource("2_0xm2m")]
 

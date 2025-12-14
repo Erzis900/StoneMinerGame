@@ -2,7 +2,7 @@ class_name Lift extends Area2D
 
 # exports
 @export var movement_speed: float = 32
-@export var movement_penalty: float = 16
+@export var movement_penalty: float = 4
 @onready var bag: Sprite2D = $BagSprite
 
 # private

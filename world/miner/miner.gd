@@ -11,6 +11,7 @@ class_name Miner extends Area2D
 # children
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var hit_audio: AudioStreamPlayer = $HitAudio
 
 # private
 enum States { WAITING, WALKING, MINING }
@@ -25,6 +26,7 @@ signal request_lift_ready
 signal loot_dumped(amount: int)
 signal damage_dealt(damage: int)
 
+
 func _physics_process(delta: float) -> void:
 	match state:
 		States.WALKING:
@@ -36,13 +38,16 @@ func _physics_process(delta: float) -> void:
 
 	add_debug_data()
 
+
 func _input(_event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
 		pass
 
+
 func add_debug_data() -> void:
 	Debug.add("Miner State", States.keys()[state])
 	Debug.add("Miner Stone", stone)
+
 
 func wait() -> void:
 	animation_player.play("wait")
@@ -70,9 +75,12 @@ func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
 	state = States.WAITING
 	request_lift_ready.emit()
 
+
 func _on_pickaxe_hit() -> void:
+	hit_audio.play()
 	spawn_mining_particles()
 	owner.floating_text_manager.display(position + pickaxe_offset, str(damage))
+
 
 func spawn_mining_particles() -> void:
 	var particles_instance = mining_particles.instantiate()
