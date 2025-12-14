@@ -2,10 +2,11 @@ class_name Lift extends Area2D
 
 # exports
 @export var movement_speed: float = 32
+@export var movement_penalty: float = 16
 @onready var bag: Sprite2D = $BagSprite
 
 # private
-enum States { READY, UNLOADING, MOVING }
+enum States { READY, UNLOADING, MOVING_DOWN, MOVING_UP }
 var state: States = States.READY
 var direction: Vector2 = Vector2.DOWN
 var stone: int = 0
@@ -23,13 +24,19 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if state == States.MOVING:
-		move(delta)
+	if state == States.MOVING_UP:
+		move_up(delta)
+	elif state == States.MOVING_DOWN:
+		move_down(delta)
 
 	add_debug_data()
 
 
-func move(delta: float) -> void:
+func move_up(delta: float) -> void:
+	position += direction * (movement_speed - movement_penalty) * delta
+
+
+func move_down(delta: float) -> void:
 	position += direction * movement_speed * delta
 
 
@@ -44,7 +51,7 @@ func _on_lift_stoper_up_area_entered(_area: Area2D) -> void:
 
 
 func _on_lift_stoper_down_area_entered(_area: Area2D) -> void:
-	if state == States.MOVING:
+	if state == States.MOVING_DOWN:
 		state = States.READY
 		ready_to_load.emit(true)
 
@@ -60,7 +67,7 @@ func _on_miner_loot_dumped(amount: int) -> void:
 	stone = amount
 	bag.show()
 
-	state = States.MOVING
+	state = States.MOVING_UP
 	change_move_direction()
 
 
@@ -71,7 +78,7 @@ func _on_unload_timer_timeout() -> void:
 
 	bag.hide()
 
-	state = States.MOVING
+	state = States.MOVING_DOWN
 	change_move_direction()
 
 
