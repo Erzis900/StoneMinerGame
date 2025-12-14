@@ -3,24 +3,25 @@ class_name Miner extends Area2D
 # exports
 @export var movement_speed: float = 64
 @export var damage: int = 1
+@export var max_hits: int = 3
+@export var mining_speed: float = 2
 
 @export var mining_particles: PackedScene
 
 # children
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var mining_timer: Timer = $MiningTimer
 
 # private
 enum States { WAITING, WALKING, MINING }
 var state: States = States.WALKING
 var direction: Vector2 = Vector2.RIGHT
 var pickaxe_offset: Vector2 = Vector2(8, -5)
+var hits: int = 0
 
 # signals
 signal request_lift_ready
 signal loot_dumped
-
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -40,6 +41,7 @@ func _input(_event: InputEvent) -> void:
 func add_debug_data() -> void:
 	Debug.add("Miner State", States.keys()[state])
 	Debug.add("Miner Position", position)
+	Debug.add("Hits", hits)
 
 
 func wait() -> void:
@@ -52,11 +54,10 @@ func walk(delta: float) -> void:
 
 
 func mine() -> void:
-	animation_player.play("mine")
+	animation_player.play("mine", -1, mining_speed)
 
 
 func _on_stone_wall_area_entered(_area: Area2D) -> void:
-	mining_timer.start()
 	state = States.MINING
 
 
@@ -64,11 +65,6 @@ func change_walk_direction() -> void:
 	direction.x *= -1
 	sprite_2d.flip_h = !sprite_2d.flip_h
 
-
-func _on_mining_timer_timeout() -> void:
-	mining_timer.stop()
-	change_walk_direction()
-	state = States.WALKING
 
 func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
 	state = States.WAITING
@@ -89,3 +85,11 @@ func _on_lift_ready_to_load(is_ready: bool) -> void:
 		state = States.WALKING
 		change_walk_direction()
 		loot_dumped.emit()
+
+
+func check_hits() -> void:
+	hits += 1
+	if hits == max_hits:
+		hits = 0
+		change_walk_direction()
+		state = States.WALKING
