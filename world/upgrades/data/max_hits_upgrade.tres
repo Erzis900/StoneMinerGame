@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://de21jbwr1sppu"]
+
+[ext_resource type="Script" uid="uid://dej32wcn7n0xq" path="res://world/upgrades/upgrade_data.gd" id="1_7ay64"]
+[ext_resource type="Script" uid="uid://bvjntqhicq7t" path="res://world/upgrades/upgrade_tier.gd" id="2_cbtgj"]
+
+[sub_resource type="Resource" id="Resource_7ay64"]
+script = ExtResource("2_cbtgj")
+cost = 50
+increase = 1.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_cbtgj"]
+script = ExtResource("2_cbtgj")
+cost = 100
+increase = 1.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[resource]
+script = ExtResource("1_7ay64")
+id = "max_hits"
+display_name = "Maximum Hits"
+tiers = Array[ExtResource("2_cbtgj")]([SubResource("Resource_7ay64"), SubResource("Resource_cbtgj")])
+metadata/_custom_type_script = "uid://dej32wcn7n0xq"

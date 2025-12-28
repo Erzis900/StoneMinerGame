@@ -1,6 +1,6 @@
 class_name DebugOverlay extends Control
 
-var is_debug: bool = true
+var is_debug: bool = false
 
 
 func _ready() -> void:

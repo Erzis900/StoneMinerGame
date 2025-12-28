@@ -1,8 +1,8 @@
 class_name Miner extends Area2D
 
 # exports
-@export var movement_speed: float = 64
-@export var damage: int = 1
+@export var movement_speed: int = 64
+@export var damage: int = 10
 @export var max_hits: int = 3
 @export var mining_speed: float = 1
 
@@ -45,8 +45,10 @@ func _input(_event: InputEvent) -> void:
 
 
 func add_debug_data() -> void:
-	Debug.add("Miner State", States.keys()[state])
-	Debug.add("Miner Stone", stone)
+	#Debug.add("Miner State", States.keys()[state])
+	#Debug.add("Miner Stone", stone)
+	Debug.add("MS", movement_speed)
+	Debug.add("DMG", damage)
 
 
 func wait() -> void:
@@ -110,3 +112,16 @@ func _on_stone_wall_stone_dropped(amount: int) -> void:
 	var floating_text_position = position + pickaxe_offset - Vector2(16, 16)
 	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount, 2.0)
 	stone += amount
+
+
+func _on_upgrade_manager_upgrade_applied(upgrade: UpgradeData) -> void:
+	var increase_factor = upgrade.get_increase() / 100.0 + 1
+	match upgrade.id:
+		"movement_speed":
+			movement_speed *= increase_factor
+		"damage":
+			damage *= increase_factor
+		"mining_speed":
+			mining_speed *= increase_factor
+		"max_hits":
+			max_hits += int(upgrade.get_increase())
