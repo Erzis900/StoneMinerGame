@@ -77,7 +77,7 @@ func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
 
 
 func _on_pickaxe_hit() -> void:
-	hit_audio.play()
+	# hit_audio.play()
 	spawn_mining_particles()
 	owner.floating_text_manager.display(position + pickaxe_offset, str(damage))
 
