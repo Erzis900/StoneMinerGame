@@ -1,16 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp4uof50ydfks"]
+[gd_scene load_steps=4 format=3 uid="uid://bp4uof50ydfks"]
 
 [ext_resource type="Script" uid="uid://j2w21vrme2om" path="res://gui/upgrade_tile.gd" id="1_1xgkl"]
+[ext_resource type="Theme" uid="uid://xa14umtq568f" path="res://gui/upgrade_ui_theme.tres" id="1_pxovr"]
+[ext_resource type="Texture2D" uid="uid://cul1k6s1su0ex" path="res://gui/assets/panel_96px.png" id="2_hq203"]
 
 [node name="UpgradeTile" type="PanelContainer"]
+offset_right = 136.0
+offset_bottom = 148.0
 script = ExtResource("1_1xgkl")
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+theme = ExtResource("1_pxovr")
+texture = ExtResource("2_hq203")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
 
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -27,7 +42,7 @@ horizontal_alignment = 1
 [node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "20 gold"
+text = "X gold"
 horizontal_alignment = 1
 
 [node name="BuyButton" type="Button" parent="MarginContainer/VBoxContainer"]
