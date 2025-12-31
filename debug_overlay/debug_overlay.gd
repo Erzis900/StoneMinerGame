@@ -1,4 +1,4 @@
-class_name DebugOverlay extends Control
+class_name DebugOverlay extends CanvasLayer
 
 var is_debug: bool = false
 

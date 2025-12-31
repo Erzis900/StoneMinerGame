@@ -7,17 +7,10 @@
 [ext_resource type="Script" uid="uid://bjlusoyweetcp" path="res://debug_overlay/engine/time_scale_h_scroll_bar.gd" id="5_us21g"]
 [ext_resource type="Script" uid="uid://r0da4ky6hpvx" path="res://debug_overlay/engine/time_scale_reset_button.gd" id="6_gy8ot"]
 
-[node name="DebugOverlay" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="DebugOverlay" type="CanvasLayer"]
 script = ExtResource("2_eunjl")
 
 [node name="Properties" type="PanelContainer" parent="."]
-layout_mode = 0
 offset_right = 128.0
 offset_bottom = 64.0
 
@@ -32,7 +25,6 @@ alignment = 1
 script = ExtResource("2_svi61")
 
 [node name="Engine" type="PanelContainer" parent="."]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

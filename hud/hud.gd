@@ -1,7 +1,5 @@
-class_name HUD extends Control
-
-@onready var gold_label: Label = $GoldLabel
+class_name HUD extends CanvasLayer
 
 
 func _on_gold_updated(amount: int) -> void:
-	gold_label.text = str(amount)
+	%GoldLabel.text = "Gold: %d" % amount
