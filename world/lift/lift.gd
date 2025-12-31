@@ -43,7 +43,7 @@ func move_down(delta: float) -> void:
 func add_debug_data() -> void:
 	#Debug.add("Lift State", States.keys()[state])
 	#Debug.add("Lift Stone", stone)
-	pass
+	Debug.add("Lift Speed", movement_speed)
 
 
 func _on_lift_stoper_up_area_entered(_area: Area2D) -> void:

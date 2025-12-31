@@ -1,11 +1,7 @@
 class_name Miner extends Area2D
 
 # exports
-@export var movement_speed: int = 64
-@export var damage: int = 10
-@export var max_hits: int = 3
-@export var mining_speed: float = 1
-
+@export var stats: MinerStats
 @export var mining_particles: PackedScene
 
 # children
@@ -47,8 +43,10 @@ func _input(_event: InputEvent) -> void:
 func add_debug_data() -> void:
 	#Debug.add("Miner State", States.keys()[state])
 	#Debug.add("Miner Stone", stone)
-	Debug.add("MS", movement_speed)
-	Debug.add("DMG", damage)
+	Debug.add("MS", stats.movement_speed)
+	Debug.add("DMG", stats.damage)
+	Debug.add("Mining speed", stats.mining_speed)
+	Debug.add("Max hits", stats.max_hits)
 
 
 func wait() -> void:
@@ -56,12 +54,12 @@ func wait() -> void:
 
 
 func walk(delta: float) -> void:
-	position += direction * movement_speed * delta
+	position += direction * stats.movement_speed * delta
 	animation_player.play("walk_right")
 
 
 func mine() -> void:
-	animation_player.play("mine", -1, mining_speed)
+	animation_player.play("mine", -1, stats.mining_speed)
 
 
 func _on_stone_wall_area_entered(_area: Area2D) -> void:
@@ -81,7 +79,7 @@ func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
 func _on_pickaxe_hit() -> void:
 	# hit_audio.play()
 	spawn_mining_particles()
-	owner.floating_text_manager.display(position + pickaxe_offset, str(damage))
+	owner.floating_text_manager.display(position + pickaxe_offset, str(stats.damage))
 
 
 func spawn_mining_particles() -> void:
@@ -100,9 +98,9 @@ func _on_lift_ready_to_load(is_ready: bool) -> void:
 
 
 func check_hits() -> void:
-	damage_dealt.emit(damage)
+	damage_dealt.emit(stats.damage)
 	hits += 1
-	if hits == max_hits:
+	if hits == stats.max_hits:
 		hits = 0
 		change_walk_direction()
 		state = States.WALKING
@@ -113,15 +111,14 @@ func _on_stone_wall_stone_dropped(amount: int) -> void:
 	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount, 2.0)
 	stone += amount
 
-
-func _on_upgrade_manager_upgrade_applied(upgrade: UpgradeData) -> void:
+func _on_upgrade_manager_miner_upgrade_applied(upgrade: UpgradeData) -> void:
 	var increase_factor = upgrade.get_increase() / 100.0 + 1
 	match upgrade.id:
 		"movement_speed":
-			movement_speed *= increase_factor
+			stats.movement_speed *= increase_factor
 		"damage":
-			damage *= increase_factor
+			stats.damage *= increase_factor
 		"mining_speed":
-			mining_speed *= increase_factor
+			stats.mining_speed *= increase_factor
 		"max_hits":
-			max_hits += int(upgrade.get_increase())
+			stats.max_hits += int(upgrade.get_increase())

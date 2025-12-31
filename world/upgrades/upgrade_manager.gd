@@ -2,13 +2,18 @@ extends Node
 class_name UpgradeManager
 
 signal response_upgrades(upgrades: Array[UpgradeData])
-signal upgrade_applied(upgrade: UpgradeData)
+signal miner_upgrade_applied(upgrade: UpgradeData)
+signal lift_upgrade_applied(upgrade: UpgradeData)
 
 @export var upgrades: Array[UpgradeData] = []
 
 func apply_upgrade(upgrade: UpgradeData) -> void:
-	upgrade_applied.emit(upgrade)
-	
+	match upgrade.get_entity_type():
+		"MINER":
+			miner_upgrade_applied.emit(upgrade)
+		"LIFT":
+			lift_upgrade_applied.emit(upgrade)
+			
 	increment_tier(upgrade)
 	
 func increment_tier(upgrade: UpgradeData) -> void:

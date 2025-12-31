@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://f4ofdiq71cn8"]
+[gd_scene load_steps=20 format=4 uid="uid://f4ofdiq71cn8"]
 
 [ext_resource type="PackedScene" uid="uid://d3w3bugoejq75" path="res://world/miner/miner.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://bybjw7chkiasm" path="res://world/world.gd" id="1_fn3g3"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://b3cluq2j01m1a" path="res://world/upgrades/data/damage_upgrade.tres" id="11_ov2xu"]
 [ext_resource type="Resource" uid="uid://de21jbwr1sppu" path="res://world/upgrades/data/max_hits_upgrade.tres" id="12_ocfjn"]
 [ext_resource type="Resource" uid="uid://0at7c5hsjq8o" path="res://world/upgrades/data/mining_speed_upgrade.tres" id="13_dqqhb"]
+[ext_resource type="Resource" uid="uid://fkdd8ratwgub" path="res://world/upgrades/data/lift_speed_upgrade.tres" id="14_dqqhb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5o24"]
 texture = ExtResource("4_h5o24")
@@ -100,7 +101,7 @@ shape = SubResource("RectangleShape2D_sc4t8")
 
 [node name="UpgradeManager" type="Node" parent="."]
 script = ExtResource("8_ai45w")
-upgrades = Array[ExtResource("9_fyhu2")]([ExtResource("10_ov2xu"), ExtResource("11_ov2xu"), ExtResource("13_dqqhb"), ExtResource("12_ocfjn")])
+upgrades = Array[ExtResource("9_fyhu2")]([ExtResource("10_ov2xu"), ExtResource("11_ov2xu"), ExtResource("13_dqqhb"), ExtResource("12_ocfjn"), ExtResource("14_dqqhb")])
 
 [connection signal="ready_to_load" from="Lift" to="Miner" method="_on_lift_ready_to_load"]
 [connection signal="unloaded" from="Lift" to="." method="_on_lift_unloaded"]
@@ -112,4 +113,4 @@ upgrades = Array[ExtResource("9_fyhu2")]([ExtResource("10_ov2xu"), ExtResource("
 [connection signal="area_entered" from="PlayerStopers/StoneWall" to="Miner" method="_on_stone_wall_area_entered"]
 [connection signal="stone_dropped" from="PlayerStopers/StoneWall" to="Miner" method="_on_stone_wall_stone_dropped"]
 [connection signal="area_entered" from="PlayerStopers/PlayerStoperLift" to="Miner" method="_on_player_stoper_lift_area_entered"]
-[connection signal="upgrade_applied" from="UpgradeManager" to="Miner" method="_on_upgrade_manager_upgrade_applied"]
+[connection signal="miner_upgrade_applied" from="UpgradeManager" to="Miner" method="_on_upgrade_manager_miner_upgrade_applied"]

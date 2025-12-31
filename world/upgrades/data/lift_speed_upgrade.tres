@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://fkdd8ratwgub"]
+
+[ext_resource type="Script" uid="uid://dej32wcn7n0xq" path="res://world/upgrades/upgrade_data.gd" id="1_8skgo"]
+[ext_resource type="Script" uid="uid://bvjntqhicq7t" path="res://world/upgrades/upgrade_tier.gd" id="2_ecxj7"]
+
+[sub_resource type="Resource" id="Resource_8skgo"]
+script = ExtResource("2_ecxj7")
+cost = 50
+increase = 20.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_ecxj7"]
+script = ExtResource("2_ecxj7")
+cost = 100
+increase = 40.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[resource]
+script = ExtResource("1_8skgo")
+id = "lift_speed"
+display_name = "Lift Speed"
+tiers = Array[ExtResource("2_ecxj7")]([SubResource("Resource_8skgo"), SubResource("Resource_ecxj7")])
+entity = 1
+metadata/_custom_type_script = "uid://dej32wcn7n0xq"
