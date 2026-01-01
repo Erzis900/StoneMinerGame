@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bp4uof50ydfks"]
 
-[ext_resource type="Script" uid="uid://j2w21vrme2om" path="res://gui/upgrade_tile.gd" id="1_1xgkl"]
-[ext_resource type="Theme" uid="uid://xa14umtq568f" path="res://gui/upgrade_ui_theme.tres" id="1_pxovr"]
+[ext_resource type="Script" uid="uid://j2w21vrme2om" path="res://gui/upgrades/upgrade_tile.gd" id="1_1xgkl"]
+[ext_resource type="Theme" uid="uid://xa14umtq568f" path="res://gui/panel_theme.tres" id="1_pxovr"]
 [ext_resource type="Texture2D" uid="uid://cul1k6s1su0ex" path="res://gui/assets/panel_96px.png" id="2_hq203"]
 
 [node name="UpgradeTile" type="PanelContainer"]

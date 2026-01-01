@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://lrc5uvnblfh4"]
 
-[ext_resource type="Script" uid="uid://cxuptep5mmrvl" path="res://gui/upgrade_gui.gd" id="1_g276j"]
-[ext_resource type="PackedScene" uid="uid://bp4uof50ydfks" path="res://gui/upgrade_tile.tscn" id="1_rvxyn"]
+[ext_resource type="Script" uid="uid://cxuptep5mmrvl" path="res://gui/upgrades/upgrade_gui.gd" id="1_g276j"]
+[ext_resource type="PackedScene" uid="uid://bp4uof50ydfks" path="res://gui/upgrades/upgrade_tile.tscn" id="1_rvxyn"]
 
 [node name="UpgradeGUI" type="Control"]
 layout_mode = 3

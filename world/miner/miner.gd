@@ -23,6 +23,12 @@ signal loot_dumped(amount: int)
 signal damage_dealt(damage: int)
 
 
+func _ready() -> void:
+	# Panel sync
+	await get_tree().process_frame
+	stats.updated.emit(stats)
+
+
 func _physics_process(delta: float) -> void:
 	match state:
 		States.WALKING:
@@ -111,6 +117,7 @@ func _on_stone_wall_stone_dropped(amount: int) -> void:
 	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount, 2.0)
 	stone += amount
 
+
 func _on_upgrade_manager_miner_upgrade_applied(upgrade: UpgradeData) -> void:
 	var increase_factor = upgrade.get_increase() / 100.0 + 1
 	match upgrade.id:
@@ -122,3 +129,8 @@ func _on_upgrade_manager_miner_upgrade_applied(upgrade: UpgradeData) -> void:
 			stats.mining_speed *= increase_factor
 		"max_hits":
 			stats.max_hits += int(upgrade.get_increase())
+		_:
+			push_error("Upgrade not matched")
+			return
+
+	stats.updated.emit(stats)

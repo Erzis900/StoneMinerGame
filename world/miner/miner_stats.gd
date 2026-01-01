@@ -1,4 +1,4 @@
-extends Resource 
+extends Resource
 class_name MinerStats
 
 @export var movement_speed: int = 64
@@ -6,4 +6,4 @@ class_name MinerStats
 @export var max_hits: int = 3
 @export var mining_speed: float = 1
 
-signal updated
+signal updated(stats: MinerStats)
