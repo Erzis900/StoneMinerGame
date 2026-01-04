@@ -2,7 +2,6 @@ class_name Miner extends Area2D
 
 # exports
 @export var stats: MinerStats
-@export var mining_particles: PackedScene
 
 # children
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -22,6 +21,7 @@ var hit_damage: int = 0
 signal request_lift_ready
 signal loot_dumped(amount: int)
 signal damage_dealt(damage: int)
+signal wall_hit(position: Vector2)
 
 
 func _ready() -> void:
@@ -70,7 +70,7 @@ func mine() -> void:
 
 
 func _on_stone_wall_area_entered(_area: Area2D) -> void:
-	state = States.MINING
+	set_state(States.MINING)
 
 
 func change_walk_direction() -> void:
@@ -79,22 +79,15 @@ func change_walk_direction() -> void:
 
 
 func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
-	state = States.WAITING
+	set_state(States.WAITING)
 	request_lift_ready.emit()
 
 
 func _on_pickaxe_hit() -> void:
-	# hit_audio.play()
-	spawn_mining_particles()
+	wall_hit.emit(position + pickaxe_offset)
 
 	hit_damage = int(stats.calculate_damage())
 	owner.floating_text_manager.display(position + pickaxe_offset, str(hit_damage))
-
-
-func spawn_mining_particles() -> void:
-	var particles_instance = mining_particles.instantiate()
-	add_child(particles_instance)
-	particles_instance.position = pickaxe_offset
 
 
 func _on_lift_ready_to_load(is_ready: bool) -> void:
@@ -102,7 +95,7 @@ func _on_lift_ready_to_load(is_ready: bool) -> void:
 		loot_dumped.emit(stone)
 		stone = 0
 
-		state = States.WALKING
+		set_state(States.WALKING)
 		change_walk_direction()
 
 
@@ -120,7 +113,7 @@ func check_hits() -> void:
 	if hits == stats.max_hits:
 		hits = 0
 		change_walk_direction()
-		state = States.WALKING
+		set_state(States.WALKING)
 
 
 func _on_stone_wall_stone_dropped(amount: int) -> void:
@@ -131,4 +124,10 @@ func _on_stone_wall_stone_dropped(amount: int) -> void:
 
 func _on_upgrade_manager_miner_upgrade_applied(upgrade: UpgradeData) -> void:
 	stats.apply_upgrade(upgrade)
-	stats.updated.emit(stats)
+
+
+func set_state(new_state: States) -> void:
+	if state == new_state:
+		return
+
+	state = new_state

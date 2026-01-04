@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://djmoj8s3p6nuj"]
 
-[ext_resource type="Script" uid="uid://u4jg0o0e4q3h" path="res://world/miner/mining_particles/mining_particles.gd" id="1_rconx"]
+[ext_resource type="Script" uid="uid://u4jg0o0e4q3h" path="res://world/fx/vfx/mining_particles/mining_particles.gd" id="1_rconx"]
 
 [sub_resource type="Gradient" id="Gradient_irw1w"]
 colors = PackedColorArray(1, 0.77254903, 0.6392157, 1, 0.972549, 0.972549, 0.972549, 0)
