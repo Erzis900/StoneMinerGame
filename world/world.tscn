@@ -111,10 +111,11 @@ upgrades = Array[ExtResource("9_fyhu2")]([ExtResource("10_ov2xu"), ExtResource("
 script = ExtResource("15_b2suy")
 mining_particles = ExtResource("16_h8lre")
 
+[connection signal="loaded" from="Lift" to="Miner" method="_on_lift_loaded"]
 [connection signal="ready_to_load" from="Lift" to="Miner" method="_on_lift_ready_to_load"]
 [connection signal="unloaded" from="Lift" to="." method="_on_lift_unloaded"]
 [connection signal="damage_dealt" from="Miner" to="PlayerStopers/StoneWall" method="_on_miner_damage_dealt"]
-[connection signal="loot_dumped" from="Miner" to="Lift" method="_on_miner_loot_dumped"]
+[connection signal="loading_started" from="Miner" to="Lift" method="_on_miner_loading_started"]
 [connection signal="request_lift_ready" from="Miner" to="Lift" method="_on_miner_request_lift_ready"]
 [connection signal="wall_hit" from="Miner" to="VFXManager" method="_on_miner_wall_hit"]
 [connection signal="area_entered" from="LiftStopers/LiftStoperUp" to="Lift" method="_on_lift_stoper_up_area_entered"]

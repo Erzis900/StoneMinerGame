@@ -9,7 +9,7 @@ class_name Miner extends Area2D
 @onready var hit_audio: AudioStreamPlayer = $HitAudio
 
 # private
-enum States { WAITING, WALKING, MINING }
+enum States { WAITING, WALKING, MINING, LOADING }
 var state: States = States.WALKING
 var direction: Vector2 = Vector2.RIGHT
 var pickaxe_offset: Vector2 = Vector2(8, -5)
@@ -20,9 +20,9 @@ var is_crit: bool = false
 
 # signals
 signal request_lift_ready
-signal loot_dumped(amount: int)
 signal damage_dealt(damage: int)
 signal wall_hit(position: Vector2)
+signal loading_started(amount: int)
 
 
 func _ready() -> void:
@@ -39,6 +39,8 @@ func _physics_process(delta: float) -> void:
 			mine()
 		States.WAITING:
 			wait()
+		States.LOADING:
+			load_lift()
 
 	add_debug_data()
 
@@ -70,6 +72,10 @@ func mine() -> void:
 	animation_player.play("mine", -1, stats.mining_speed)
 
 
+func load_lift() -> void:
+	animation_player.play("wait")
+
+
 func _on_stone_wall_area_entered(_area: Area2D) -> void:
 	set_state(States.MINING)
 
@@ -88,6 +94,7 @@ func _on_pickaxe_hit() -> void:
 	wall_hit.emit(position + pickaxe_offset)
 
 	var hit_data = stats.get_hit_data()
+	hit_damage = hit_data.damage
 	owner.floating_text_manager.display(
 		position + pickaxe_offset, str(hit_data.damage), hit_data.is_crit
 	)
@@ -95,11 +102,8 @@ func _on_pickaxe_hit() -> void:
 
 func _on_lift_ready_to_load(is_ready: bool) -> void:
 	if is_ready and state == States.WAITING:
-		loot_dumped.emit(stone)
-		stone = 0
-
-		set_state(States.WALKING)
-		change_walk_direction()
+		set_state(States.LOADING)
+		loading_started.emit(stone)
 
 
 func _on_hit_finished() -> void:
@@ -134,3 +138,10 @@ func set_state(new_state: States) -> void:
 		return
 
 	state = new_state
+
+
+func _on_lift_loaded() -> void:
+	stone = 0
+
+	set_state(States.WALKING)
+	change_walk_direction()

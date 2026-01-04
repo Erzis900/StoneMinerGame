@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3w3bugoejq75"]
+[gd_scene load_steps=12 format=3 uid="uid://d3w3bugoejq75"]
 
 [ext_resource type="Texture2D" uid="uid://dy3yjnayasqqm" path="res://world/miner/miner.png" id="1_1u7pu"]
 [ext_resource type="Script" uid="uid://3fx54j3lymhk" path="res://world/miner/miner.gd" id="1_irw1w"]
 [ext_resource type="Script" uid="uid://b02ak2uwhpk68" path="res://world/miner/miner_stats.gd" id="2_tan5t"]
-[ext_resource type="PackedScene" uid="uid://djmoj8s3p6nuj" path="res://world/fx/vfx/mining_particles/mining_particles.tscn" id="3_34c8q"]
 [ext_resource type="AudioStream" uid="uid://bi2bg0om3b3rl" path="res://world/miner/sfx/hit.wav" id="4_qhn71"]
 
 [sub_resource type="Resource" id="Resource_tan5t"]
@@ -97,7 +96,6 @@ _data = {
 [node name="Miner" type="Area2D"]
 script = ExtResource("1_irw1w")
 stats = SubResource("Resource_tan5t")
-mining_particles = ExtResource("3_34c8q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)

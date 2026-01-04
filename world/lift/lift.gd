@@ -6,7 +6,7 @@ class_name Lift extends Area2D
 @onready var bag: Sprite2D = $BagSprite
 
 # private
-enum States { READY, UNLOADING, MOVING_DOWN, MOVING_UP }
+enum States { READY, UNLOADING, MOVING_DOWN, MOVING_UP, LOADING }
 var state: States = States.READY
 var direction: Vector2 = Vector2.DOWN
 var stone: int = 0
@@ -14,20 +14,28 @@ var stone: int = 0
 # signals
 signal ready_to_load(is_ready: bool)
 signal unloaded(amount: int)
+signal loaded
 
 # children
 @onready var unload_timer: Timer = $UnloadTimer
+@onready var load_timer: Timer = $LoadTimer
+@onready var progress_bar: TextureProgressBar = $ProgressBar
 
 
 func _ready() -> void:
 	bag.hide()
+	progress_bar.hide()
+	progress_bar.max_value = load_timer.wait_time
 
 
 func _physics_process(delta: float) -> void:
-	if state == States.MOVING_UP:
-		move_up(delta)
-	elif state == States.MOVING_DOWN:
-		move_down(delta)
+	match state:
+		States.MOVING_UP:
+			move_up(delta)
+		States.MOVING_DOWN:
+			move_down(delta)
+		States.LOADING:
+			load_loot()
 
 	add_debug_data()
 
@@ -38,6 +46,10 @@ func move_up(delta: float) -> void:
 
 func move_down(delta: float) -> void:
 	position += direction * movement_speed * delta
+
+
+func load_loot() -> void:
+	progress_bar.value = load_timer.time_left
 
 
 func add_debug_data() -> void:
@@ -64,16 +76,7 @@ func _on_miner_request_lift_ready() -> void:
 		ready_to_load.emit(false)
 
 
-func _on_miner_loot_dumped(amount: int) -> void:
-	stone = amount
-	bag.show()
-
-	state = States.MOVING_UP
-	change_move_direction()
-
-
 func _on_unload_timer_timeout() -> void:
-	unload_timer.stop()
 	unloaded.emit(stone)
 	stone = 0
 
@@ -85,3 +88,20 @@ func _on_unload_timer_timeout() -> void:
 
 func change_move_direction() -> void:
 	direction.y *= -1
+
+
+func _on_miner_loading_started(amount: int) -> void:
+	stone = amount
+	state = States.LOADING
+
+	progress_bar.show()
+	load_timer.start()
+
+
+func _on_load_timer_timeout() -> void:
+	progress_bar.hide()
+	bag.show()
+	state = States.MOVING_UP
+	change_move_direction()
+
+	loaded.emit()
