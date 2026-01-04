@@ -94,6 +94,8 @@ func _on_miner_loading_started(amount: int) -> void:
 	stone = amount
 	state = States.LOADING
 
+	#print(load_timer.wait_time)
+
 	progress_bar.show()
 	load_timer.start()
 
@@ -105,3 +107,19 @@ func _on_load_timer_timeout() -> void:
 	change_move_direction()
 
 	loaded.emit()
+
+
+func _on_upgrade_manager_lift_upgrade_applied(upgrade: UpgradeData) -> void:
+	var increase_factor = upgrade.get_increase() / 100 + 1
+	match upgrade.id:
+		"lift_speed":
+			movement_speed = int(movement_speed * increase_factor)
+		"loading_speed":
+			load_timer.wait_time *= (1 - upgrade.get_increase() / 100)
+			progress_bar.max_value = load_timer.wait_time
+			print(load_timer.wait_time)
+		_:
+			push_error("Upgrade not matched")
+			return
+
+	#updated.emit(self)
