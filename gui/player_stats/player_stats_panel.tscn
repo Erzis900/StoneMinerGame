@@ -45,3 +45,13 @@ text = "Mining Speed: xxx"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Maximum Hits: xxx"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Maximum Hits: xxx"
+
+[node name="CritMultiLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Maximum Hits: xxx"
