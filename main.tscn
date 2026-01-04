@@ -39,9 +39,9 @@ render_target_update_mode = 4
 [node name="HUD" parent="." instance=ExtResource("5_lquwl")]
 
 [node name="UpgradeGUI" parent="." instance=ExtResource("3_7mycd")]
-offset_left = 252.0
+offset_left = 240.0
 offset_top = 144.0
-offset_right = -156.0
+offset_right = -150.0
 offset_bottom = -774.0
 
 [node name="PlayerStatsGUI" parent="." instance=ExtResource("5_272bh")]
@@ -56,5 +56,6 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="DebugOverlay" parent="." instance=ExtResource("2_0xm2m")]
+visible = false
 
 [node name="FloatingTextManager" parent="." instance=ExtResource("3_h2yge")]
