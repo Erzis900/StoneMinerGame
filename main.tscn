@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://ntcbmcffxfh6" path="res://debug_overlay/debug_overlay.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://lrc5uvnblfh4" path="res://gui/upgrades/upgrade_gui.tscn" id="3_7mycd"]
 [ext_resource type="PackedScene" uid="uid://d0tcqf26j86px" path="res://world/floating_text/floating_text_manager.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://cxwui2jlyfmyh" path="res://gui/player_stats/player_stats_panel.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://bq6b2ufd7cyf2" path="res://gui/player_stats/player_stats_gui.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://d2bo4eybxrm5q" path="res://hud/hud.tscn" id="5_lquwl"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "sub_viewport", "world", "hud", "upgrade_gui", "player_stats_panel")]
+[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "sub_viewport", "world", "hud", "upgrade_gui", "player_stats_gui")]
 script = ExtResource("1_1bvp3")
 floating_text_manager = NodePath("FloatingTextManager")
 sub_viewport_container = NodePath("SubViewportContainer")
@@ -16,7 +16,7 @@ sub_viewport = NodePath("SubViewportContainer/SubViewport")
 world = NodePath("SubViewportContainer/SubViewport/World")
 hud = NodePath("HUD")
 upgrade_gui = NodePath("UpgradeGUI")
-player_stats_panel = NodePath("PlayerStatsPanel")
+player_stats_gui = NodePath("PlayerStatsGUI")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -44,16 +44,14 @@ offset_top = 144.0
 offset_right = 252.0
 offset_bottom = 144.0
 
-[node name="PlayerStatsPanel" parent="." instance=ExtResource("5_272bh")]
+[node name="PlayerStatsGUI" parent="." instance=ExtResource("5_272bh")]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -356.0
-offset_top = -70.0
+offset_left = -102.0
 offset_right = -102.0
-offset_bottom = 70.0
 grow_horizontal = 0
 grow_vertical = 2
 

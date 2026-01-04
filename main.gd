@@ -6,7 +6,7 @@ extends Node
 @export var world: World
 @export var hud: HUD
 @export var upgrade_gui: UpgradeGUI
-@export var player_stats_panel: PlayerStatsPanel
+@export var player_stats_gui: PlayerStatsGUI
 
 
 func _ready() -> void:
@@ -18,4 +18,4 @@ func _ready() -> void:
 	upgrade_gui.buy_pressed.connect(world._on_upgrade_buy_pressed)
 	world.upgrade_manager.response_upgrades.connect(upgrade_gui._on_response_upgrades)
 	world.gold_updated.connect(hud._on_gold_updated)
-	world.miner.stats.updated.connect(player_stats_panel._on_player_stats_updated)
+	world.miner.stats.updated.connect(player_stats_gui.player_stats_panel._on_player_stats_updated)

@@ -1,4 +1,10 @@
-[gd_resource type="Theme" format=3 uid="uid://drcmthgqgbcq0"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://drcmthgqgbcq0"]
+
+[ext_resource type="Texture2D" uid="uid://c8hsgmtug2w01" path="res://gui/assets/panel.png" id="1_vlu3e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g82cv"]
+texture = ExtResource("1_vlu3e")
+region_rect = Rect2(0, 0, 16, 16)
 
 [resource]
 Button/font_sizes/font_size = 32
@@ -6,4 +12,5 @@ Label/font_sizes/font_size = 32
 MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
-MarginContainer/constants/margin_top = 8
+MarginContainer/constants/margin_top = 16
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_g82cv")

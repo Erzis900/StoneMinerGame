@@ -16,6 +16,7 @@ var direction: Vector2 = Vector2.RIGHT
 var pickaxe_offset: Vector2 = Vector2(8, -5)
 var hits: int = 0
 var stone: int = 0
+var hit_damage: int = 0
 
 # signals
 signal request_lift_ready
@@ -85,7 +86,9 @@ func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
 func _on_pickaxe_hit() -> void:
 	# hit_audio.play()
 	spawn_mining_particles()
-	owner.floating_text_manager.display(position + pickaxe_offset, str(stats.damage))
+
+	hit_damage = int(stats.calculate_damage())
+	owner.floating_text_manager.display(position + pickaxe_offset, str(hit_damage))
 
 
 func spawn_mining_particles() -> void:
@@ -103,8 +106,16 @@ func _on_lift_ready_to_load(is_ready: bool) -> void:
 		change_walk_direction()
 
 
+func _on_hit_finished() -> void:
+	deal_damage()
+	check_hits()
+
+
+func deal_damage() -> void:
+	damage_dealt.emit(hit_damage)
+
+
 func check_hits() -> void:
-	damage_dealt.emit(stats.damage)
 	hits += 1
 	if hits == stats.max_hits:
 		hits = 0
@@ -119,18 +130,5 @@ func _on_stone_wall_stone_dropped(amount: int) -> void:
 
 
 func _on_upgrade_manager_miner_upgrade_applied(upgrade: UpgradeData) -> void:
-	var increase_factor = upgrade.get_increase() / 100.0 + 1
-	match upgrade.id:
-		"movement_speed":
-			stats.movement_speed *= increase_factor
-		"damage":
-			stats.damage *= increase_factor
-		"mining_speed":
-			stats.mining_speed *= increase_factor
-		"max_hits":
-			stats.max_hits += int(upgrade.get_increase())
-		_:
-			push_error("Upgrade not matched")
-			return
-
+	stats.apply_upgrade(upgrade)
 	stats.updated.emit(stats)

@@ -46,7 +46,7 @@ tracks/1/keys = {
 "method": &"_on_pickaxe_hit"
 }, {
 "args": [],
-"method": &"check_hits"
+"method": &"_on_hit_finished"
 }]
 }
 
@@ -104,7 +104,7 @@ position = Vector2(0, -6)
 texture = ExtResource("1_1u7pu")
 hframes = 5
 vframes = 3
-frame = 10
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
