@@ -16,6 +16,7 @@ var pickaxe_offset: Vector2 = Vector2(8, -5)
 var hits: int = 0
 var stone: int = 0
 var hit_damage: int = 0
+var is_crit: bool = false
 
 # signals
 signal request_lift_ready
@@ -86,8 +87,10 @@ func _on_player_stoper_lift_area_entered(_area: Area2D) -> void:
 func _on_pickaxe_hit() -> void:
 	wall_hit.emit(position + pickaxe_offset)
 
-	hit_damage = int(stats.calculate_damage())
-	owner.floating_text_manager.display(position + pickaxe_offset, str(hit_damage))
+	var hit_data = stats.get_hit_data()
+	owner.floating_text_manager.display(
+		position + pickaxe_offset, str(hit_data.damage), hit_data.is_crit
+	)
 
 
 func _on_lift_ready_to_load(is_ready: bool) -> void:
@@ -118,7 +121,7 @@ func check_hits() -> void:
 
 func _on_stone_wall_stone_dropped(amount: int) -> void:
 	var floating_text_position = position + pickaxe_offset - Vector2(16, 16)
-	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount, 2.0)
+	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount, false, 2.0)
 	stone += amount
 
 

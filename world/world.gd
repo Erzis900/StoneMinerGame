@@ -12,11 +12,16 @@ var sub_viewport_size: Vector2i
 signal gold_updated(amount: int)
 
 
+func _ready() -> void:
+	await get_tree().process_frame
+	gold_updated.emit(gold)
+
+
 func _on_lift_unloaded(amount: int) -> void:
 	gold += amount
 
 	var text_position = sub_viewport_size / 2
-	floating_text_manager.display(text_position, "+%d Gold" % amount, 4.0)
+	floating_text_manager.display(text_position, "+%d Gold" % amount, false, 4.0)
 
 	gold_updated.emit(gold)
 
@@ -28,17 +33,13 @@ func _on_upgrade_buy_pressed(upgrade: UpgradeData) -> void:
 
 		if upgrade.id == "max_hits":
 			floating_text_manager.display(
-				sub_viewport_size / 2,
-				"+%d %s" % [upgrade.get_increase(), upgrade.display_name],
-				1.0
+				sub_viewport_size / 2, "+%d %s" % [upgrade.get_increase(), upgrade.display_name]
 			)
 		else:
 			floating_text_manager.display(
-				sub_viewport_size / 2,
-				"+%d%% %s" % [upgrade.get_increase(), upgrade.display_name],
-				1.0
+				sub_viewport_size / 2, "+%d%% %s" % [upgrade.get_increase(), upgrade.display_name]
 			)
 
 		upgrade_manager.apply_upgrade(upgrade)
 	else:
-		floating_text_manager.display(sub_viewport_size / 2, "Not enough gold!", 1.0)
+		floating_text_manager.display(sub_viewport_size / 2, "Not enough gold!")

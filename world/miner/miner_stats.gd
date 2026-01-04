@@ -29,8 +29,13 @@ func apply_upgrade(upgrade: UpgradeData) -> void:
 	updated.emit(self)
 
 
-func calculate_damage() -> float:
-	if randf() < crit_chance / 100:
-		return damage * (1.0 + crit_multi / 100)
+func get_hit_data() -> HitData:
+	var is_crit = randf() < crit_chance / 100
+	var hit_damage = damage
+	if is_crit:
+		hit_damage = damage * (1.0 + crit_multi / 100)
 
-	return damage
+	var result = HitData.new()
+	result.damage = hit_damage
+	result.is_crit = is_crit
+	return result
