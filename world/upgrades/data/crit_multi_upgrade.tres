@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://c57kfp6okub"]
+
+[ext_resource type="Script" uid="uid://dej32wcn7n0xq" path="res://world/upgrades/upgrade_data.gd" id="1_jcq16"]
+[ext_resource type="Script" uid="uid://bvjntqhicq7t" path="res://world/upgrades/upgrade_tier.gd" id="2_124o6"]
+
+[sub_resource type="Resource" id="Resource_jcq16"]
+script = ExtResource("2_124o6")
+cost = 20
+increase = 20.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_124o6"]
+script = ExtResource("2_124o6")
+cost = 40
+increase = 40.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[resource]
+script = ExtResource("1_jcq16")
+id = "crit_multi"
+display_name = "Critical Hit Multiplier"
+tiers = Array[ExtResource("2_124o6")]([SubResource("Resource_jcq16"), SubResource("Resource_124o6")])
+metadata/_custom_type_script = "uid://dej32wcn7n0xq"

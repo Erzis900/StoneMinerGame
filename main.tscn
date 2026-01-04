@@ -41,8 +41,8 @@ render_target_update_mode = 4
 [node name="UpgradeGUI" parent="." instance=ExtResource("3_7mycd")]
 offset_left = 252.0
 offset_top = 144.0
-offset_right = 252.0
-offset_bottom = 144.0
+offset_right = -156.0
+offset_bottom = -774.0
 
 [node name="PlayerStatsGUI" parent="." instance=ExtResource("5_272bh")]
 anchors_preset = 6

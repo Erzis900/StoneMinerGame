@@ -22,6 +22,10 @@ func apply_upgrade(upgrade: UpgradeData) -> void:
 			mining_speed *= increase_factor
 		"max_hits":
 			max_hits += int(upgrade.get_increase())
+		"crit_chance":
+			crit_chance *= increase_factor
+		"crit_multi":
+			crit_multi *= increase_factor
 		_:
 			push_error("Upgrade not matched")
 			return

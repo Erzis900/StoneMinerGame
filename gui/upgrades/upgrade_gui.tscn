@@ -13,15 +13,21 @@ grow_vertical = 2
 script = ExtResource("1_g276j")
 upgrade_tile_scene = ExtResource("1_rvxyn")
 
-[node name="UpgradeContainer" type="HBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpgradeContainer" type="HBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="UpgradeTile" parent="UpgradeContainer" instance=ExtResource("1_rvxyn")]
+[node name="UpgradeTile" parent="ScrollContainer/UpgradeContainer" instance=ExtResource("1_rvxyn")]
 layout_mode = 2
 
-[node name="UpgradeTile2" parent="UpgradeContainer" instance=ExtResource("1_rvxyn")]
+[node name="UpgradeTile2" parent="ScrollContainer/UpgradeContainer" instance=ExtResource("1_rvxyn")]
 layout_mode = 2
