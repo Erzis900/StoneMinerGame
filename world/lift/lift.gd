@@ -17,13 +17,15 @@ signal loaded
 # children
 @onready var unload_timer: Timer = $UnloadTimer
 @onready var load_timer: Timer = $LoadTimer
-@onready var progress_bar: TextureProgressBar = $ProgressBar
+@onready var load_progress_bar: TextureProgressBar = $LoadProgressBar
+@onready var unload_progress_bar: TextureProgressBar = $UnloadProgressBar
 @onready var bag: Sprite2D = $BagSprite
 
 
 func _ready() -> void:
 	bag.hide()
-	progress_bar.hide()
+	load_progress_bar.hide()
+	unload_progress_bar.hide()
 
 	sync_stats()
 
@@ -31,7 +33,8 @@ func _ready() -> void:
 func sync_stats() -> void:
 	load_timer.wait_time = stats.load_time
 	unload_timer.wait_time = stats.unload_time
-	progress_bar.max_value = stats.load_time
+	load_progress_bar.max_value = stats.load_time
+	unload_progress_bar.max_value = stats.unload_time
 
 
 func _physics_process(delta: float) -> void:
@@ -42,6 +45,8 @@ func _physics_process(delta: float) -> void:
 			move_down(delta)
 		States.LOADING:
 			load_loot()
+		States.UNLOADING:
+			unload_loot()
 
 	add_debug_data()
 
@@ -55,7 +60,11 @@ func move_down(delta: float) -> void:
 
 
 func load_loot() -> void:
-	progress_bar.value = load_timer.time_left
+	load_progress_bar.value = load_timer.time_left
+
+
+func unload_loot() -> void:
+	unload_progress_bar.value = unload_timer.time_left
 
 
 func add_debug_data() -> void:
@@ -66,6 +75,7 @@ func add_debug_data() -> void:
 
 func _on_lift_stoper_up_area_entered(_area: Area2D) -> void:
 	state = States.UNLOADING
+	unload_progress_bar.show()
 	unload_timer.start()
 
 
@@ -87,6 +97,7 @@ func _on_unload_timer_timeout() -> void:
 	stone = 0
 
 	bag.hide()
+	unload_progress_bar.hide()
 
 	state = States.MOVING_DOWN
 	change_move_direction()
@@ -102,12 +113,12 @@ func _on_miner_loading_started(amount: int) -> void:
 
 	#print(load_timer.wait_time)
 
-	progress_bar.show()
+	load_progress_bar.show()
 	load_timer.start()
 
 
 func _on_load_timer_timeout() -> void:
-	progress_bar.hide()
+	load_progress_bar.hide()
 	bag.show()
 	state = States.MOVING_UP
 	change_move_direction()

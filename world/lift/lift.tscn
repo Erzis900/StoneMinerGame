@@ -27,16 +27,12 @@ shape = SubResource("RectangleShape2D_4yro4")
 position = Vector2(0, -74)
 texture = ExtResource("1_qafl2")
 
-[node name="UnloadTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="BagSprite" type="Sprite2D" parent="."]
 position = Vector2(0, 7.0000005)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_hc7wn")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="LoadProgressBar" type="TextureProgressBar" parent="."]
 offset_left = -8.0
 offset_top = -18.0
 offset_right = 8.0
@@ -51,5 +47,20 @@ texture_progress = ExtResource("4_kgk1h")
 wait_time = 5.0
 one_shot = true
 
-[connection signal="timeout" from="UnloadTimer" to="." method="_on_unload_timer_timeout"]
+[node name="UnloadProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -8.0
+offset_top = 20.0
+offset_right = 8.0
+offset_bottom = 36.0
+step = 0.1
+fill_mode = 4
+texture_under = ExtResource("6_q1e1a")
+texture_over = ExtResource("5_x665r")
+texture_progress = ExtResource("4_kgk1h")
+
+[node name="UnloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="LoadTimer" to="." method="_on_load_timer_timeout"]
+[connection signal="timeout" from="UnloadTimer" to="." method="_on_unload_timer_timeout"]
