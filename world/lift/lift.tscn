@@ -1,17 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://cekf6rmx2iwnc"]
+[gd_scene load_steps=10 format=3 uid="uid://cekf6rmx2iwnc"]
 
 [ext_resource type="Texture2D" uid="uid://r38dvkkjx4xm" path="res://world/lift/lift.png" id="1_qafl2"]
 [ext_resource type="Script" uid="uid://clsp57nqcu1bl" path="res://world/lift/lift.gd" id="1_s8oxf"]
+[ext_resource type="Script" uid="uid://oiuu0swnaagl" path="res://world/lift/lift_stats.gd" id="2_x665r"]
 [ext_resource type="Texture2D" uid="uid://dyef7pjtdtc55" path="res://world/lift/bag.png" id="3_hc7wn"]
 [ext_resource type="Texture2D" uid="uid://cdsl7cjjxg750" path="res://world/lift/progress_bar/circle bar under.png" id="4_kgk1h"]
 [ext_resource type="Texture2D" uid="uid://dkinksodgv6dg" path="res://world/lift/progress_bar/circle bar over.png" id="5_x665r"]
 [ext_resource type="Texture2D" uid="uid://c7a0hphqqudw0" path="res://world/lift/progress_bar/circle bar progress.png" id="6_q1e1a"]
+
+[sub_resource type="Resource" id="Resource_q1e1a"]
+script = ExtResource("2_x665r")
+metadata/_custom_type_script = "uid://oiuu0swnaagl"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4yro4"]
 size = Vector2(32, 8)
 
 [node name="Lift" type="Area2D"]
 script = ExtResource("1_s8oxf")
+stats = SubResource("Resource_q1e1a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12)

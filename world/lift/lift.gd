@@ -1,9 +1,7 @@
 class_name Lift extends Area2D
 
 # exports
-@export var movement_speed: float = 32
-@export var movement_penalty: float = 4
-@onready var bag: Sprite2D = $BagSprite
+@export var stats: LiftStats
 
 # private
 enum States { READY, UNLOADING, MOVING_DOWN, MOVING_UP, LOADING }
@@ -20,12 +18,20 @@ signal loaded
 @onready var unload_timer: Timer = $UnloadTimer
 @onready var load_timer: Timer = $LoadTimer
 @onready var progress_bar: TextureProgressBar = $ProgressBar
+@onready var bag: Sprite2D = $BagSprite
 
 
 func _ready() -> void:
 	bag.hide()
 	progress_bar.hide()
-	progress_bar.max_value = load_timer.wait_time
+
+	sync_stats()
+
+
+func sync_stats() -> void:
+	load_timer.wait_time = stats.load_time
+	unload_timer.wait_time = stats.unload_time
+	progress_bar.max_value = stats.load_time
 
 
 func _physics_process(delta: float) -> void:
@@ -41,11 +47,11 @@ func _physics_process(delta: float) -> void:
 
 
 func move_up(delta: float) -> void:
-	position += direction * (movement_speed - movement_penalty) * delta
+	position += direction * (stats.movement_speed - stats.movement_penalty) * delta
 
 
 func move_down(delta: float) -> void:
-	position += direction * movement_speed * delta
+	position += direction * stats.movement_speed * delta
 
 
 func load_loot() -> void:
@@ -55,7 +61,7 @@ func load_loot() -> void:
 func add_debug_data() -> void:
 	#Debug.add("Lift State", States.keys()[state])
 	#Debug.add("Lift Stone", stone)
-	Debug.add("Lift Speed", movement_speed)
+	pass
 
 
 func _on_lift_stoper_up_area_entered(_area: Area2D) -> void:
@@ -110,16 +116,6 @@ func _on_load_timer_timeout() -> void:
 
 
 func _on_upgrade_manager_lift_upgrade_applied(upgrade: UpgradeData) -> void:
-	var increase_factor = upgrade.get_increase() / 100 + 1
-	match upgrade.id:
-		"lift_speed":
-			movement_speed = int(movement_speed * increase_factor)
-		"loading_speed":
-			load_timer.wait_time *= (1 - upgrade.get_increase() / 100)
-			progress_bar.max_value = load_timer.wait_time
-			print(load_timer.wait_time)
-		_:
-			push_error("Upgrade not matched")
-			return
+	stats.apply_upgrade(upgrade)
 
-	#updated.emit(self)
+	sync_stats()

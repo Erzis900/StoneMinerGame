@@ -2,10 +2,11 @@ class_name World extends Node2D
 
 @onready var upgrade_manager: UpgradeManager = $UpgradeManager
 @onready var miner: Miner = $Miner
+@onready var lift: Lift = $Lift
 
 # private
 var floating_text_manager: FloatingTextManager
-var gold: int = 0
+var gold: int = 1000
 var sub_viewport_size: Vector2i
 
 # signals

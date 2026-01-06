@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxh23hjb1e1np"]
+
+[ext_resource type="PackedScene" uid="uid://f8og7qwbsekd" path="res://gui/lift_stats/lift_stats_panel.tscn" id="1_0aoch"]
+[ext_resource type="Script" uid="uid://becgfmjsux8lb" path="res://gui/lift_stats/lift_stats_gui.gd" id="1_il12i"]
+
+[node name="LiftStatsGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_il12i")
+
+[node name="LiftStatsPanel" parent="." instance=ExtResource("1_0aoch")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -70.0
+offset_bottom = 70.0
+grow_vertical = 2
+
+[node name="ToggleButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 52.0
+offset_right = 36.0
+offset_bottom = 86.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -1.5707964
+text = "Lift Stats"
+
+[connection signal="pressed" from="ToggleButton" to="." method="_on_toggle_button_pressed"]
+[connection signal="toggled" from="ToggleButton" to="." method="_on_toggle_button_toggled"]

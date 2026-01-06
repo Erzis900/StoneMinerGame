@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://f4ofdiq71cn8"]
+[gd_scene load_steps=26 format=4 uid="uid://f4ofdiq71cn8"]
 
 [ext_resource type="PackedScene" uid="uid://d3w3bugoejq75" path="res://world/miner/miner.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://bybjw7chkiasm" path="res://world/world.gd" id="1_fn3g3"]
@@ -18,7 +18,8 @@
 [ext_resource type="Resource" uid="uid://2317sqa3ehfe" path="res://world/upgrades/data/crit_chance_upgrade.tres" id="15_ysn08"]
 [ext_resource type="PackedScene" uid="uid://djmoj8s3p6nuj" path="res://world/fx/vfx/mining_particles/mining_particles.tscn" id="16_h8lre"]
 [ext_resource type="Resource" uid="uid://c57kfp6okub" path="res://world/upgrades/data/crit_multi_upgrade.tres" id="16_m0cxt"]
-[ext_resource type="Resource" uid="uid://gfjby8v1axym" path="res://world/upgrades/data/lift_load_speed.tres" id="17_j34ew"]
+[ext_resource type="Resource" uid="uid://gfjby8v1axym" path="res://world/upgrades/data/lift_load_speed_upgrade.tres" id="17_j34ew"]
+[ext_resource type="Resource" uid="uid://xkt1klhuem2h" path="res://world/upgrades/data/lift_unload_speed_upgrade.tres" id="18_p2iis"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5o24"]
 texture = ExtResource("4_h5o24")
@@ -106,7 +107,7 @@ shape = SubResource("RectangleShape2D_sc4t8")
 
 [node name="UpgradeManager" type="Node" parent="."]
 script = ExtResource("8_ai45w")
-upgrades = Array[ExtResource("9_fyhu2")]([ExtResource("10_ov2xu"), ExtResource("11_ov2xu"), ExtResource("13_dqqhb"), ExtResource("12_ocfjn"), ExtResource("14_dqqhb"), ExtResource("15_ysn08"), ExtResource("16_m0cxt"), ExtResource("17_j34ew")])
+upgrades = Array[ExtResource("9_fyhu2")]([ExtResource("10_ov2xu"), ExtResource("11_ov2xu"), ExtResource("13_dqqhb"), ExtResource("12_ocfjn"), ExtResource("14_dqqhb"), ExtResource("15_ysn08"), ExtResource("16_m0cxt"), ExtResource("17_j34ew"), ExtResource("18_p2iis")])
 
 [node name="VFXManager" type="Node" parent="."]
 script = ExtResource("15_b2suy")
