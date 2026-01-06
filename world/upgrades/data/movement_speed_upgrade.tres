@@ -20,4 +20,5 @@ script = ExtResource("1_6hhih")
 id = "movement_speed"
 display_name = "Movement Speed"
 tiers = Array[ExtResource("2_0quqb")]([SubResource("Resource_6hhih"), SubResource("Resource_0quqb")])
+required_level = 1
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

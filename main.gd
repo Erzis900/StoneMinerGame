@@ -14,7 +14,6 @@ func _ready() -> void:
 	world.floating_text_manager = floating_text_manager
 	world.sub_viewport_size = sub_viewport.size
 
-	upgrade_gui.request_upgrades.connect(world.upgrade_manager._on_request_upgrades)
 	upgrade_gui.buy_pressed.connect(world._on_upgrade_buy_pressed)
 	world.gold_updated.connect(hud._on_gold_updated)
 	world.gold_updated.connect(upgrade_gui._on_gold_updated)
@@ -23,9 +22,10 @@ func _ready() -> void:
 	world.miner.xp_manager.xp_updated.connect(hud._on_xp_updated)
 
 	world.upgrade_manager.response_upgrades.connect(upgrade_gui._on_response_upgrades)
-	upgrade_gui.request_upgrades.emit()
 
 	# Sync
+	world.upgrade_manager._on_level_updated(world.miner.xp_manager.level)
+	world.upgrade_manager.send_upgrades()
 	hud._on_gold_updated(world.gold)
 	upgrade_gui._on_gold_updated(world.gold)
 	player_stats_gui.player_stats_panel._on_player_stats_updated(world.miner.stats)

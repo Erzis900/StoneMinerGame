@@ -10,6 +10,11 @@ signal xp_updated(xp: int, max_xp: int)
 signal level_updated(level: int)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
+		increment_level()
+
+
 func gain_xp(added_xp: int) -> void:
 	xp += added_xp
 

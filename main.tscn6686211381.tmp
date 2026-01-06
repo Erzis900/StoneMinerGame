@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://cn0b72xnr3sm6"]
+
+[ext_resource type="Script" uid="uid://bvootevqvcowr" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://f4ofdiq71cn8" path="res://world/world.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ntcbmcffxfh6" path="res://debug_overlay/debug_overlay.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://lrc5uvnblfh4" path="res://gui/upgrades/upgrade_gui.tscn" id="3_7mycd"]
+[ext_resource type="PackedScene" uid="uid://d0tcqf26j86px" path="res://world/floating_text/floating_text_manager.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bq6b2ufd7cyf2" path="res://gui/player_stats/player_stats_gui.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://d2bo4eybxrm5q" path="res://hud/hud.tscn" id="5_lquwl"]
+
+[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "sub_viewport", "world", "hud", "upgrade_gui", "player_stats_gui")]
+script = ExtResource("1_1bvp3")
+floating_text_manager = NodePath("FloatingTextManager")
+sub_viewport_container = NodePath("SubViewportContainer")
+sub_viewport = NodePath("SubViewportContainer/SubViewport")
+world = NodePath("SubViewportContainer/SubViewport/World")
+hud = NodePath("HUD")
+upgrade_gui = NodePath("UpgradeGUI")
+player_stats_gui = NodePath("PlayerStatsGUI")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 6
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ig7tw")]
+
+[node name="HUD" parent="." instance=ExtResource("5_lquwl")]
+
+[node name="UpgradeGUI" parent="." instance=ExtResource("3_7mycd")]
+offset_left = 240.0
+offset_top = 144.0
+offset_right = -150.0
+offset_bottom = -774.0
+
+[node name="PlayerStatsGUI" parent="." instance=ExtResource("5_272bh")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_right = -102.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="DebugOverlay" parent="." instance=ExtResource("2_0xm2m")]
+visible = false
+
+[node name="FloatingTextManager" parent="." instance=ExtResource("3_h2yge")]

@@ -16,6 +16,7 @@ func apply_upgrade(upgrade: UpgradeData) -> void:
 			lift_upgrade_applied.emit(upgrade)
 
 	increment_tier(upgrade)
+	send_upgrades()
 
 
 func increment_tier(upgrade: UpgradeData) -> void:
@@ -25,7 +26,6 @@ func increment_tier(upgrade: UpgradeData) -> void:
 		upgrade.current_tier += 1
 
 	upgrades[find_upgrade_index(upgrade)] = upgrade
-	response_upgrades.emit(upgrades)
 
 
 #func find_upgrade(id: String) -> UpgradeData:
@@ -43,5 +43,21 @@ func find_upgrade_index(upgrade: UpgradeData) -> int:
 	return -1
 
 
-func _on_request_upgrades() -> void:
+func _on_level_updated(level: int) -> void:
+	var unlocked_changed := false
+
+	for i in upgrades.size():
+		var u = upgrades[i]
+		var was_unlocked = u.is_unlocked
+		u.is_unlocked = level >= u.required_level
+
+		if was_unlocked != u.is_unlocked:
+			unlocked_changed = true
+			upgrades[i] = u
+
+	if unlocked_changed:
+		send_upgrades()
+
+
+func send_upgrades() -> void:
 	response_upgrades.emit(upgrades)

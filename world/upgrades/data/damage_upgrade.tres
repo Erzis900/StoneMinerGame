@@ -20,4 +20,5 @@ script = ExtResource("1_qo6yx")
 id = "damage"
 display_name = "Damage"
 tiers = Array[ExtResource("2_a1gme")]([SubResource("Resource_qo6yx"), SubResource("Resource_a1gme")])
+required_level = 2
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

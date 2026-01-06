@@ -21,4 +21,5 @@ id = "lift_speed"
 display_name = "Lift Speed"
 tiers = Array[ExtResource("2_ecxj7")]([SubResource("Resource_8skgo"), SubResource("Resource_ecxj7")])
 entity = 1
+required_level = 4
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

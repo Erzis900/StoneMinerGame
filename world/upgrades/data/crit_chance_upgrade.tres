@@ -20,4 +20,5 @@ script = ExtResource("1_rflns")
 id = "crit_chance"
 display_name = "Critical Hit Chance"
 tiers = Array[ExtResource("2_k2h7h")]([SubResource("Resource_rflns"), SubResource("Resource_k2h7h")])
+required_level = 5
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

@@ -20,4 +20,5 @@ script = ExtResource("1_7ay64")
 id = "max_hits"
 display_name = "Maximum Hits"
 tiers = Array[ExtResource("2_cbtgj")]([SubResource("Resource_7ay64"), SubResource("Resource_cbtgj")])
+required_level = 3
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

@@ -20,4 +20,5 @@ script = ExtResource("1_fux2p")
 id = "mining_speed"
 display_name = "Mining Speed"
 tiers = Array[ExtResource("2_83egy")]([SubResource("Resource_fux2p"), SubResource("Resource_83egy")])
+required_level = 2
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"
