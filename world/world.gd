@@ -5,7 +5,6 @@ class_name World extends Node2D
 @onready var lift: Lift = $Lift
 
 # private
-var floating_text_manager: FloatingTextManager
 var gold: int = 1000
 var sub_viewport_size: Vector2i
 
@@ -21,7 +20,7 @@ func _on_lift_unloaded(amount: int) -> void:
 	gold += amount
 
 	var text_position = sub_viewport_size / 2
-	floating_text_manager.display(text_position, "+%d Gold" % amount, false, 4.0)
+	FText.display(text_position, "+%d Gold" % amount, false, 4.0)
 
 	gold_updated.emit(gold)
 
@@ -32,14 +31,14 @@ func _on_upgrade_buy_pressed(upgrade: UpgradeData) -> void:
 		gold_updated.emit(gold)
 
 		if upgrade.id == "max_hits":
-			floating_text_manager.display(
+			FText.display(
 				sub_viewport_size / 2, "+%d %s" % [upgrade.get_increase(), upgrade.display_name]
 			)
 		else:
-			floating_text_manager.display(
+			FText.display(
 				sub_viewport_size / 2, "+%d%% %s" % [upgrade.get_increase(), upgrade.display_name]
 			)
 
 		upgrade_manager.apply_upgrade(upgrade)
 	else:
-		floating_text_manager.display(sub_viewport_size / 2, "Not enough gold!")
+		FText.display(sub_viewport_size / 2, "Not enough gold!")

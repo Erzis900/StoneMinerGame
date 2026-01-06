@@ -1,7 +1,9 @@
 class_name FloatingTextManager extends Node
 
-@export var floating_text: PackedScene
+#@export var floating_text: PackedScene
 var stretch_shrink: int = 0
+var floating_text = preload("res://world/floating_text/floating_text.tscn")
+var container: Node = null
 
 
 func display(
@@ -12,7 +14,7 @@ func display(
 	font_size: int = 32
 ) -> void:
 	var floating_text_instance = floating_text.instantiate() as FloatingText
-	add_child(floating_text_instance)
+	container.add_child(floating_text_instance)
 
 	floating_text_instance.init(
 		text_position * stretch_shrink, text_content, is_crit, lifetime, font_size

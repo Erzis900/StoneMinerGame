@@ -90,9 +90,7 @@ func _on_pickaxe_hit() -> void:
 
 	var hit_data = stats.get_hit_data()
 	hit_damage = hit_data.damage
-	owner.floating_text_manager.display(
-		position + pickaxe_offset, str(hit_data.damage), hit_data.is_crit
-	)
+	FText.display(position + pickaxe_offset, str(hit_data.damage), hit_data.is_crit)
 
 
 func _on_lift_ready_to_load(is_ready: bool) -> void:
@@ -121,7 +119,7 @@ func check_hits() -> void:
 
 func _on_stone_wall_stone_dropped(amount: int) -> void:
 	var floating_text_position = position + pickaxe_offset - Vector2(16, 16)
-	owner.floating_text_manager.display(floating_text_position, "+%d Stone" % amount, false, 2.0)
+	FText.display(floating_text_position, "+%d Stone" % amount, false, 2.0)
 	stone += amount
 
 

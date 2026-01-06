@@ -4,14 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://f4ofdiq71cn8" path="res://world/world.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ntcbmcffxfh6" path="res://debug_overlay/debug_overlay.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://lrc5uvnblfh4" path="res://gui/upgrades/upgrade_gui.tscn" id="3_7mycd"]
-[ext_resource type="PackedScene" uid="uid://d0tcqf26j86px" path="res://world/floating_text/floating_text_manager.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dxh23hjb1e1np" path="res://gui/lift_stats/lift_stats_gui.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bq6b2ufd7cyf2" path="res://gui/player_stats/player_stats_gui.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://d2bo4eybxrm5q" path="res://hud/hud.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://b31u6w0768w1w" path="res://world/floating_text/floating_text_container.gd" id="8_5vw27"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("floating_text_manager", "sub_viewport_container", "sub_viewport", "world", "hud", "upgrade_gui", "player_stats_gui", "lift_stats_gui")]
+[node name="Main" type="Node" node_paths=PackedStringArray("sub_viewport_container", "sub_viewport", "world", "hud", "upgrade_gui", "player_stats_gui", "lift_stats_gui")]
 script = ExtResource("1_1bvp3")
-floating_text_manager = NodePath("FloatingTextManager")
 sub_viewport_container = NodePath("SubViewportContainer")
 sub_viewport = NodePath("SubViewportContainer/SubViewport")
 world = NodePath("SubViewportContainer/SubViewport/World")
@@ -70,4 +69,5 @@ grow_vertical = 2
 [node name="DebugOverlay" parent="." instance=ExtResource("2_0xm2m")]
 visible = false
 
-[node name="FloatingTextManager" parent="." instance=ExtResource("3_h2yge")]
+[node name="FloatingTextContainer" type="Node" parent="."]
+script = ExtResource("8_5vw27")

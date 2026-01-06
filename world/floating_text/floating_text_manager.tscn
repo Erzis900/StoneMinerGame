@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0tcqf26j86px"]
-
-[ext_resource type="Script" uid="uid://cyke6aj0xbqwt" path="res://world/floating_text/floating_text_manager.gd" id="1_ssjbj"]
-[ext_resource type="PackedScene" uid="uid://bfr4xr1n64prx" path="res://world/floating_text/floating_text.tscn" id="2_deqe8"]
-
-[node name="FloatingTextManager" type="Node"]
-script = ExtResource("1_ssjbj")
-floating_text = ExtResource("2_deqe8")
