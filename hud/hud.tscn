@@ -5,16 +5,43 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_2gk58")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="GoldContainer" type="MarginContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 58.0
+offset_left = -134.0
+offset_bottom = 70.0
 grow_horizontal = 0
 
-[node name="GoldLabel" type="Label" parent="MarginContainer"]
+[node name="GoldLabel" type="Label" parent="GoldContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Gold: 0"
+
+[node name="XPContainer" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_top = -58.0
+offset_right = 51.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="XPContainer"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="XPContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Level: "
+
+[node name="XPLabel" type="Label" parent="XPContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "XP: "

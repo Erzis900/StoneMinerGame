@@ -16,6 +16,18 @@ func _ready() -> void:
 
 	upgrade_gui.request_upgrades.connect(world.upgrade_manager._on_request_upgrades)
 	upgrade_gui.buy_pressed.connect(world._on_upgrade_buy_pressed)
-	world.upgrade_manager.response_upgrades.connect(upgrade_gui._on_response_upgrades)
 	world.gold_updated.connect(hud._on_gold_updated)
+	world.gold_updated.connect(upgrade_gui._on_gold_updated)
 	world.miner.stats.updated.connect(player_stats_gui.player_stats_panel._on_player_stats_updated)
+	world.miner.xp_manager.level_updated.connect(hud._on_level_updated)
+	world.miner.xp_manager.xp_updated.connect(hud._on_xp_updated)
+
+	world.upgrade_manager.response_upgrades.connect(upgrade_gui._on_response_upgrades)
+	upgrade_gui.request_upgrades.emit()
+
+	# Sync
+	hud._on_gold_updated(world.gold)
+	upgrade_gui._on_gold_updated(world.gold)
+	player_stats_gui.player_stats_panel._on_player_stats_updated(world.miner.stats)
+	hud._on_level_updated(world.miner.xp_manager.level)
+	hud._on_xp_updated(world.miner.xp_manager.xp, world.miner.xp_manager.max_xp)

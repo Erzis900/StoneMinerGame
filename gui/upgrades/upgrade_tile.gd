@@ -4,6 +4,7 @@ class_name UpgradeTile
 @onready var name_label: Label = %NameLabel
 @onready var cost_label: Label = %CostLabel
 @onready var tier_label: Label = %TierLabel
+@onready var buy_button: Button = %BuyButton
 
 signal buy_pressed(upgrade: UpgradeData)
 
@@ -24,3 +25,14 @@ func setup(upgrade: UpgradeData) -> void:
 
 func _on_buy_button_pressed() -> void:
 	buy_pressed.emit(loaded_upgrade)
+
+
+func update_modulation(gold: int) -> void:
+	if !loaded_upgrade:
+		return
+
+	var can_afford = gold >= loaded_upgrade.get_cost()
+
+	if !can_afford:
+		buy_button.disabled = true
+		modulate = Color(0.5, 0.5, 0.5)

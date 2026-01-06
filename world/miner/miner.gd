@@ -7,6 +7,7 @@ class_name Miner extends Area2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hit_audio: AudioStreamPlayer = $HitAudio
+@onready var xp_manager: ExperienceManager = $ExperienceManager
 
 # private
 enum States { WAITING, WALKING, MINING, LOADING }
@@ -23,12 +24,6 @@ signal request_lift_ready
 signal damage_dealt(damage: int)
 signal wall_hit(position: Vector2)
 signal loading_started(amount: int)
-
-
-func _ready() -> void:
-	# Panel sync
-	await get_tree().process_frame
-	stats.updated.emit(stats)
 
 
 func _physics_process(delta: float) -> void:
@@ -108,6 +103,7 @@ func _on_lift_ready_to_load(is_ready: bool) -> void:
 
 func _on_hit_finished() -> void:
 	deal_damage()
+	xp_manager.gain_xp(20)
 	check_hits()
 
 

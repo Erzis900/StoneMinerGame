@@ -5,16 +5,11 @@ class_name World extends Node2D
 
 # private
 var floating_text_manager: FloatingTextManager
-var gold: int = 23020
+var gold: int = 0
 var sub_viewport_size: Vector2i
 
 # signals
 signal gold_updated(amount: int)
-
-
-func _ready() -> void:
-	await get_tree().process_frame
-	gold_updated.emit(gold)
 
 
 func _on_lift_unloaded(amount: int) -> void:

@@ -8,11 +8,6 @@ signal request_upgrades
 signal buy_pressed(upgrade: UpgradeData)
 
 
-func _ready() -> void:
-	await get_tree().process_frame
-	request_upgrades.emit()
-
-
 func _on_response_upgrades(upgrades: Array[UpgradeData]) -> void:
 	for child in upgrade_container.get_children():
 		child.queue_free()
@@ -29,3 +24,8 @@ func _on_response_upgrades(upgrades: Array[UpgradeData]) -> void:
 
 func _on_buy_pressed(upgrade: UpgradeData) -> void:
 	buy_pressed.emit(upgrade)
+
+
+func _on_gold_updated(gold: int) -> void:
+	for upgrade in upgrade_container.get_children():
+		upgrade.update_modulation(gold)
