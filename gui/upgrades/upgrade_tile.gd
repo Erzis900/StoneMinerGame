@@ -32,7 +32,5 @@ func update_modulation(gold: int) -> void:
 		return
 
 	var can_afford = gold >= loaded_upgrade.get_cost()
-
-	if !can_afford:
-		buy_button.disabled = true
-		modulate = Color(0.5, 0.5, 0.5)
+	buy_button.disabled = !can_afford
+	modulate = Color.WHITE if can_afford else Color(0.5, 0.5, 0.5)

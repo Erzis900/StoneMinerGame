@@ -12,6 +12,8 @@ func _on_response_upgrades(upgrades: Array[UpgradeData]) -> void:
 	for child in upgrade_container.get_children():
 		child.queue_free()
 
+	upgrades.sort_custom(_compare_upgrade_cost)
+
 	for u in upgrades:
 		if u.is_maxed:
 			continue
@@ -20,6 +22,10 @@ func _on_response_upgrades(upgrades: Array[UpgradeData]) -> void:
 		upgrade_container.add_child(tile)
 		tile.setup(u)
 		tile.buy_pressed.connect(_on_buy_pressed)
+
+
+func _compare_upgrade_cost(a: UpgradeData, b: UpgradeData) -> bool:
+	return a.get_cost() < b.get_cost()
 
 
 func _on_buy_pressed(upgrade: UpgradeData) -> void:
