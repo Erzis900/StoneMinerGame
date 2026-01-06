@@ -10,8 +10,8 @@ extends Node
 
 
 func _ready() -> void:
-	world.sub_viewport_size = sub_viewport.size
 	FText.stretch_shrink = sub_viewport_container.stretch_shrink
+	FText.default_position = sub_viewport.size / 2
 
 	upgrade_gui.buy_pressed.connect(world._on_upgrade_buy_pressed)
 	world.gold_updated.connect(hud._on_gold_updated)

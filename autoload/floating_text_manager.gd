@@ -1,14 +1,14 @@
 class_name FloatingTextManager extends Node
 
-#@export var floating_text: PackedScene
 var stretch_shrink: int = 0
 var floating_text = preload("res://world/floating_text/floating_text.tscn")
 var container: Node = null
+var default_position: Vector2i = Vector2i.ZERO
 
 
 func display(
-	text_position: Vector2,
 	text_content: String,
+	text_position: Vector2 = default_position,
 	is_crit: bool = false,
 	lifetime: float = 1.0,
 	font_size: int = 32
