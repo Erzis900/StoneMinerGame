@@ -1,24 +1,48 @@
-[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://de21jbwr1sppu"]
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=10 format=3 uid="uid://de21jbwr1sppu"]
 
 [ext_resource type="Script" uid="uid://dej32wcn7n0xq" path="res://world/upgrades/upgrade_data.gd" id="1_7ay64"]
+[ext_resource type="Script" uid="uid://bmvb6gi7v6lvb" path="res://world/upgrades/tiers_data.gd" id="2_75pe4"]
 [ext_resource type="Script" uid="uid://bvjntqhicq7t" path="res://world/upgrades/upgrade_tier.gd" id="2_cbtgj"]
 
-[sub_resource type="Resource" id="Resource_7ay64"]
+[sub_resource type="Resource" id="Resource_id538"]
 script = ExtResource("2_cbtgj")
-cost = 50
+cost = 10
 increase = 1.0
 metadata/_custom_type_script = "uid://bvjntqhicq7t"
 
 [sub_resource type="Resource" id="Resource_cbtgj"]
 script = ExtResource("2_cbtgj")
-cost = 100
-increase = 1.0
+cost = 50
+increase = 2.0
 metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_75pe4"]
+script = ExtResource("2_cbtgj")
+cost = 250
+increase = 3.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_yq3j8"]
+script = ExtResource("2_cbtgj")
+cost = 1250
+increase = 4.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_tmacs"]
+script = ExtResource("2_cbtgj")
+cost = 6250
+increase = 5.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_onmsw"]
+script = ExtResource("2_75pe4")
+tiers = Array[ExtResource("2_cbtgj")]([SubResource("Resource_id538"), SubResource("Resource_cbtgj"), SubResource("Resource_75pe4"), SubResource("Resource_yq3j8"), SubResource("Resource_tmacs")])
+metadata/_custom_type_script = "uid://bmvb6gi7v6lvb"
 
 [resource]
 script = ExtResource("1_7ay64")
 id = "max_hits"
 display_name = "Maximum Hits"
-tiers = Array[ExtResource("2_cbtgj")]([SubResource("Resource_7ay64"), SubResource("Resource_cbtgj")])
-required_level = 3
+tiers_data = SubResource("Resource_onmsw")
+required_level = 5
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

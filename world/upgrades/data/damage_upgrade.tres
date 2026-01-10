@@ -1,24 +1,12 @@
-[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://b3cluq2j01m1a"]
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://b3cluq2j01m1a"]
 
 [ext_resource type="Script" uid="uid://dej32wcn7n0xq" path="res://world/upgrades/upgrade_data.gd" id="1_qo6yx"]
-[ext_resource type="Script" uid="uid://bvjntqhicq7t" path="res://world/upgrades/upgrade_tier.gd" id="2_a1gme"]
-
-[sub_resource type="Resource" id="Resource_qo6yx"]
-script = ExtResource("2_a1gme")
-cost = 15
-increase = 30.0
-metadata/_custom_type_script = "uid://bvjntqhicq7t"
-
-[sub_resource type="Resource" id="Resource_a1gme"]
-script = ExtResource("2_a1gme")
-cost = 40
-increase = 50.0
-metadata/_custom_type_script = "uid://bvjntqhicq7t"
+[ext_resource type="Resource" uid="uid://by0bskbq3p2ay" path="res://world/upgrades/tiers.tres" id="2_qo6yx"]
 
 [resource]
 script = ExtResource("1_qo6yx")
 id = "damage"
 display_name = "Damage"
-tiers = Array[ExtResource("2_a1gme")]([SubResource("Resource_qo6yx"), SubResource("Resource_a1gme")])
+tiers_data = ExtResource("2_qo6yx")
 required_level = 2
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

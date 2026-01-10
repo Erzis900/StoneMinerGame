@@ -17,7 +17,6 @@ var pickaxe_offset: Vector2 = Vector2(8, -5)
 var hits: int = 0
 var stone: int = 0
 var hit_damage: int = 0
-var is_crit: bool = false
 
 # signals
 signal request_lift_ready
@@ -118,8 +117,9 @@ func check_hits() -> void:
 
 
 func _on_stone_wall_stone_dropped(amount: int) -> void:
-	var floating_text_position = position + pickaxe_offset - Vector2(16, 16)
-	FText.display("+%d Stone" % amount, floating_text_position, false, 2.0)
+	#var floating_text_position = position + pickaxe_offset - Vector2(16, 16)
+	#FText.display("+%d Stone" % amount, floating_text_position, false, 2.0)
+	FText.display("+%d Stone" % amount)
 	stone += amount
 
 

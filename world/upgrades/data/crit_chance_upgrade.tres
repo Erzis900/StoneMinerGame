@@ -1,24 +1,12 @@
-[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://2317sqa3ehfe"]
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://2317sqa3ehfe"]
 
 [ext_resource type="Script" uid="uid://dej32wcn7n0xq" path="res://world/upgrades/upgrade_data.gd" id="1_rflns"]
-[ext_resource type="Script" uid="uid://bvjntqhicq7t" path="res://world/upgrades/upgrade_tier.gd" id="2_k2h7h"]
-
-[sub_resource type="Resource" id="Resource_rflns"]
-script = ExtResource("2_k2h7h")
-cost = 50
-increase = 10.0
-metadata/_custom_type_script = "uid://bvjntqhicq7t"
-
-[sub_resource type="Resource" id="Resource_k2h7h"]
-script = ExtResource("2_k2h7h")
-cost = 100
-increase = 30.0
-metadata/_custom_type_script = "uid://bvjntqhicq7t"
+[ext_resource type="Resource" uid="uid://by0bskbq3p2ay" path="res://world/upgrades/tiers.tres" id="2_rflns"]
 
 [resource]
 script = ExtResource("1_rflns")
 id = "crit_chance"
 display_name = "Critical Hit Chance"
-tiers = Array[ExtResource("2_k2h7h")]([SubResource("Resource_rflns"), SubResource("Resource_k2h7h")])
-required_level = 5
+tiers_data = ExtResource("2_rflns")
+required_level = 3
 metadata/_custom_type_script = "uid://dej32wcn7n0xq"

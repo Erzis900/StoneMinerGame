@@ -5,7 +5,7 @@ class_name World extends Node2D
 @onready var lift: Lift = $Lift
 
 # private
-var gold: int = 1000
+var gold: int = 0
 
 # signals
 signal gold_updated(amount: int)

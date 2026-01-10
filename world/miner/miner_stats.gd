@@ -5,7 +5,7 @@ class_name MinerStats
 @export var damage: int = 10
 @export var max_hits: int = 3
 @export var mining_speed: float = 1
-@export var crit_chance: float = 80
+@export var crit_chance: float = 10
 @export var crit_multi: float = 50
 
 signal updated(stats: MinerStats)

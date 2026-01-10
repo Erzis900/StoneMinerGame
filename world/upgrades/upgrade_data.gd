@@ -5,7 +5,7 @@ enum EntityType { MINER, LIFT }
 
 @export var id: String
 @export var display_name: String
-@export var tiers: Array[UpgradeTier]
+@export var tiers_data: TiersData
 @export var entity: EntityType
 @export var required_level: int = 0
 
@@ -15,11 +15,11 @@ var is_unlocked: bool = false
 
 
 func get_cost() -> int:
-	return tiers[current_tier].cost
+	return tiers_data.tiers[current_tier].cost
 
 
 func get_increase() -> float:
-	return tiers[current_tier].increase
+	return tiers_data.tiers[current_tier].increase
 
 
 func get_entity_type() -> String:

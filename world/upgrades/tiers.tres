@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="TiersData" load_steps=8 format=3 uid="uid://by0bskbq3p2ay"]
+
+[ext_resource type="Script" uid="uid://bmvb6gi7v6lvb" path="res://world/upgrades/tiers_data.gd" id="1_pinmi"]
+[ext_resource type="Script" uid="uid://bvjntqhicq7t" path="res://world/upgrades/upgrade_tier.gd" id="2_wgrwx"]
+
+[sub_resource type="Resource" id="Resource_pinmi"]
+script = ExtResource("2_wgrwx")
+cost = 10
+increase = 10.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_wgrwx"]
+script = ExtResource("2_wgrwx")
+cost = 50
+increase = 20.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_d0ua5"]
+script = ExtResource("2_wgrwx")
+cost = 150
+increase = 30.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_vqq7e"]
+script = ExtResource("2_wgrwx")
+cost = 250
+increase = 40.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[sub_resource type="Resource" id="Resource_s47mk"]
+script = ExtResource("2_wgrwx")
+cost = 400
+increase = 50.0
+metadata/_custom_type_script = "uid://bvjntqhicq7t"
+
+[resource]
+script = ExtResource("1_pinmi")
+tiers = Array[ExtResource("2_wgrwx")]([SubResource("Resource_pinmi"), SubResource("Resource_wgrwx"), SubResource("Resource_d0ua5"), SubResource("Resource_vqq7e"), SubResource("Resource_s47mk")])
+metadata/_custom_type_script = "uid://bmvb6gi7v6lvb"

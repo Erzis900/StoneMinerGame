@@ -20,7 +20,7 @@ func apply_upgrade(upgrade: UpgradeData) -> void:
 
 
 func increment_tier(upgrade: UpgradeData) -> void:
-	if upgrade.current_tier >= upgrade.tiers.size() - 1:
+	if upgrade.current_tier >= upgrade.tiers_data.tiers.size() - 1:
 		upgrade.is_maxed = true
 	else:
 		upgrade.current_tier += 1
