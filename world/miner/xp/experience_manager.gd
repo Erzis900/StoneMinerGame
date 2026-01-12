@@ -4,7 +4,7 @@ class_name ExperienceManager
 var level: int = 1
 var xp: int = 0
 @export var max_xp: int = 100
-@export var max_xp_multiplier: int = 4
+@export var max_xp_add_amount: int = 200
 
 signal xp_updated(xp: int, max_xp: int)
 signal level_updated(level: int)
@@ -22,7 +22,7 @@ func gain_xp(added_xp: int) -> void:
 		increment_level()
 		var overflow_xp = max_xp - xp
 		xp = overflow_xp
-		max_xp += 200
+		max_xp += max_xp_add_amount
 
 	xp_updated.emit(xp, max_xp)
 
